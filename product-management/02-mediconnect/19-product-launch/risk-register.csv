@@ -1,0 +1,11 @@
+Risk ID,Risk,Category,Probability,Impact,Mitigation,Launch Gate,Owner
+LR-001,Stale availability causes failed booking,Scheduling,Medium,High,Slot validation and reconciliation,Required,Engineering
+LR-002,Duplicate booking during retries,Engineering,Low,Critical,Idempotency and concurrency tests,Required,Engineering
+LR-003,Notification provider outage,Operations,Medium,High,Failure tracking and escalation,Required,Operations
+LR-004,Unauthorized cross-organization access,Security,Low,Critical,RBAC and tenant isolation tests,Required,Security
+LR-005,Analytics captures prohibited sensitive data,Privacy,Low,Critical,Schema review and payload scanning,Required,Privacy
+LR-006,Staff adoption is low,Adoption,Medium,Medium,Training and workflow feedback,Monitor,Product
+LR-007,Support workload exceeds capacity,Operations,Medium,High,Pilot limits and escalation model,Monitor,Operations
+LR-008,Integration complexity delays launch,Technical,Medium,High,Defer external integrations,Monitor,Engineering
+LR-009,Metrics are incomplete at launch,Analytics,Medium,High,Instrumentation QA and reconciliation,Required,Data
+LR-010,Scope expands into clinical workflows,Product,Medium,High,Explicit non-goals and governance,Required,Product
