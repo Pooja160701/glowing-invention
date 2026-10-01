@@ -1,0 +1,20 @@
+record_type,id,name,parent_id,goal,initiative,release,status
+goal,GOAL-01,Improve Financial Understanding,,,R0.2,Active
+goal,GOAL-02,Improve Financial Planning,,,R0.3,Active
+goal,GOAL-03,Increase Actionability,,,R0.4,Active
+goal,GOAL-04,Build Trust and Sustainable Engagement,,,R0.4,Active
+initiative,INIT-01,Financial Data Foundation,,GOAL-01,R0.2,Planned
+initiative,INIT-02,Financial Clarity Dashboard,,GOAL-01,R0.2,Planned
+initiative,INIT-03,Budget Control,,GOAL-02,R0.3,Planned
+initiative,INIT-04,Savings Goals,,GOAL-02,R0.3,Planned
+initiative,INIT-05,Explainable Financial Insights,,GOAL-03,R0.4,Planned
+initiative,INIT-06,Privacy and Data Controls,,GOAL-04,R0.2,Planned
+initiative,INIT-07,Notification Management,,GOAL-04,R0.4,Planned
+feature,AHA-F01,Transaction Import,INIT-01,GOAL-01,R0.2,Planned
+feature,AHA-F03,Automatic Categorization,INIT-01,GOAL-01,R0.2,Planned
+feature,AHA-F05,Financial Summary,INIT-02,GOAL-01,R0.2,Planned
+feature,AHA-F07,Budget Creation,INIT-03,GOAL-02,R0.3,Planned
+feature,AHA-F09,Savings Goals,INIT-04,GOAL-02,R0.3,Planned
+feature,AHA-F11,Explainable Insights,INIT-05,GOAL-03,R0.4,Planned
+feature,AHA-F13,Data Controls,INIT-06,GOAL-04,R0.2,Planned
+feature,AHA-F14,Notification Preferences,INIT-07,GOAL-04,R0.4,Planned
