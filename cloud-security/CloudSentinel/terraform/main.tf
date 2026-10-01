@@ -64,3 +64,11 @@ module "config" {
   security_logs_bucket_name = module.security_logging.security_logs_bucket_id
   kms_key_arn               = module.kms.security_key_arn
 }
+
+module "inspector" {
+  source = "./modules/inspector"
+
+  project_name = var.project_name
+  environment  = var.environment
+  aws_region   = var.aws_region
+}

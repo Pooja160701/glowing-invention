@@ -92,3 +92,13 @@ output "config_rule_names" {
   description = "AWS Config compliance rules managed by CloudSentinel"
   value       = module.config.config_rule_names
 }
+
+output "inspector_account_id" {
+  description = "AWS account monitored by Amazon Inspector"
+  value       = module.inspector.inspector_account_id
+}
+
+output "inspector_resource_types" {
+  description = "Resource types monitored by Amazon Inspector"
+  value       = module.inspector.inspector_resource_types
+}
