@@ -45,3 +45,11 @@ module "cloudtrail" {
   security_logs_bucket_arn  = module.security_logging.security_logs_bucket_arn
   kms_key_arn               = module.kms.security_key_arn
 }
+
+module "security_services" {
+  source = "./modules/security-services"
+
+  project_name = var.project_name
+  environment  = var.environment
+  aws_region   = var.aws_region
+}

@@ -62,3 +62,13 @@ output "cloudtrail_name" {
   description = "CloudSentinel CloudTrail name"
   value       = module.cloudtrail.trail_name
 }
+
+output "guardduty_detector_id" {
+  description = "GuardDuty detector ID"
+  value       = module.security_services.guardduty_detector_id
+}
+
+output "securityhub_enabled" {
+  description = "Whether Security Hub is enabled"
+  value       = module.security_services.securityhub_enabled
+}
