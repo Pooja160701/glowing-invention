@@ -1,0 +1,9 @@
+Decision ID,Decision,Area,Status,Rationale,Impact,Review
+DEC-001,MVP remains administrative appointment product,Scope,Accepted,Keep initial problem measurable and bounded,Clinical functionality excluded,As needed
+DEC-002,Use CCJR as North Star,Metrics,Accepted,Measures administrative journey completion,Analytics and KPI design,Quarterly
+DEC-003,Use atomic booking and idempotency,Architecture,Accepted,Protect booking-state integrity,API/database/QA requirements,Before scale
+DEC-004,Include self-service cancellation and rescheduling,MVP,Accepted,Address appointment-change friction,Patient workflows and policy model,After pilot
+DEC-005,Use privacy-safe canonical analytics events,Data,Accepted,Reduce unnecessary sensitive-data collection,Analytics schema governance,Quarterly
+DEC-006,Defer external integrations,Strategy,Accepted,Stabilize canonical scheduling model first,Integration roadmap moves post-MVP,After MVP evidence
+DEC-007,Use exception queue for operational failures,Operations,Accepted,Make failures visible and recoverable,Staff workflow and dashboards,After launch
+DEC-008,Require organization-scoped authorization,Security,Accepted,Prevent cross-organization access,Multi-tenant authorization model,Before production
