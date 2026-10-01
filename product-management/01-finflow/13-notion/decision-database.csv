@@ -1,0 +1,6 @@
+decision_id,title,area,decision,rationale,status,review_trigger
+DEC-001,MVP scope,Strategy,Focus on financial understanding and planning,Reduces scope and product risk,Accepted,Strong evidence for broader scope
+DEC-002,Categorization,Data,Allow user correction,Protects downstream data quality,Accepted,Persistent high correction rate
+DEC-003,Insights,AI/Product,Explain insight reasoning,Supports trust and informed action,Accepted,Research shows explanation adds no value
+DEC-004,Roadmap,Strategy,Use outcome-based planning,Connects work to measurable outcomes,Accepted,Operating model changes
+DEC-005,Tooling,Operations,External tools are specifications unless connected,Maintains portfolio integrity,Accepted,Real workspace connection
