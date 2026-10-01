@@ -2,6 +2,13 @@ data "aws_caller_identity" "current" {}
 
 data "aws_partition" "current" {}
 
+locals {
+  cloudtrail_name = "${var.project_name}-${var.environment}-security-trail"
+
+  cloudtrail_arn = "arn:${data.aws_partition.current.partition}:cloudtrail:${var.aws_region}:${data.aws_caller_identity.current.account_id}:trail/${local.cloudtrail_name}"
+}
+
+
 resource "aws_kms_key" "security" {
   description             = "CloudSentinel security encryption key"
   enable_key_rotation     = true
@@ -17,6 +24,7 @@ resource "aws_kms_key" "security" {
     ManagedBy   = "Terraform"
   }
 }
+
 
 resource "aws_kms_alias" "security" {
   name          = "alias/${var.project_name}-${var.environment}-security"
@@ -37,12 +45,18 @@ data "aws_iam_policy_document" "security_key" {
       ]
     }
 
-    actions   = ["kms:*"]
-    resources = ["*"]
+    actions = [
+      "kms:*"
+    ]
+
+    resources = [
+      "*"
+    ]
   }
 
+
   statement {
-    sid    = "AllowSecurityServicesToEncrypt"
+    sid    = "AllowCloudTrailToEncrypt"
     effect = "Allow"
 
     principals {
@@ -58,20 +72,23 @@ data "aws_iam_policy_document" "security_key" {
       "kms:DescribeKey"
     ]
 
-    resources = ["*"]
+    resources = [
+      "*"
+    ]
 
     condition {
       test     = "StringEquals"
-      variable = "aws:SourceAccount"
+      variable = "aws:SourceArn"
 
       values = [
-        data.aws_caller_identity.current.account_id
+        local.cloudtrail_arn
       ]
     }
   }
 
+
   statement {
-    sid    = "AllowSecurityServicesToDecrypt"
+    sid    = "AllowCloudTrailToDecrypt"
     effect = "Allow"
 
     principals {
@@ -87,14 +104,16 @@ data "aws_iam_policy_document" "security_key" {
       "kms:DescribeKey"
     ]
 
-    resources = ["*"]
+    resources = [
+      "*"
+    ]
 
     condition {
       test     = "StringEquals"
-      variable = "aws:SourceAccount"
+      variable = "aws:SourceArn"
 
       values = [
-        data.aws_caller_identity.current.account_id
+        local.cloudtrail_arn
       ]
     }
   }

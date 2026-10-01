@@ -22,13 +22,26 @@ module "kms" {
 
   project_name = var.project_name
   environment  = var.environment
+  aws_region   = var.aws_region
 }
-
 
 module "security_logging" {
   source = "./modules/security-logging"
 
-  project_name = var.project_name
-  environment  = var.environment
-  kms_key_arn  = module.kms.security_key_arn
+  project_name    = var.project_name
+  environment     = var.environment
+  aws_region      = var.aws_region
+  kms_key_arn     = module.kms.security_key_arn
+  cloudtrail_name = "${var.project_name}-${var.environment}-security-trail"
+}
+
+module "cloudtrail" {
+  source = "./modules/cloudtrail"
+
+  project_name              = var.project_name
+  environment               = var.environment
+  aws_region                = var.aws_region
+  security_logs_bucket_name = module.security_logging.security_logs_bucket_id
+  security_logs_bucket_arn  = module.security_logging.security_logs_bucket_arn
+  kms_key_arn               = module.kms.security_key_arn
 }

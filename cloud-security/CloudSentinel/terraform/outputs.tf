@@ -47,3 +47,18 @@ output "security_logs_bucket_arn" {
   description = "CloudSentinel centralized security logging bucket ARN"
   value       = module.security_logging.security_logs_bucket_arn
 }
+
+output "cloudtrail_id" {
+  description = "CloudSentinel CloudTrail ID"
+  value       = module.cloudtrail.trail_id
+}
+
+output "cloudtrail_arn" {
+  description = "CloudSentinel CloudTrail ARN"
+  value       = module.cloudtrail.trail_arn
+}
+
+output "cloudtrail_name" {
+  description = "CloudSentinel CloudTrail name"
+  value       = module.cloudtrail.trail_name
+}

@@ -2,6 +2,10 @@ data "aws_caller_identity" "current" {}
 
 data "aws_partition" "current" {}
 
+locals {
+  cloudtrail_arn = "arn:${data.aws_partition.current.partition}:cloudtrail:${var.aws_region}:${data.aws_caller_identity.current.account_id}:trail/${var.cloudtrail_name}"
+}
+
 resource "aws_s3_bucket" "security_logs" {
   bucket = "${var.project_name}-${var.environment}-security-logs-${data.aws_caller_identity.current.account_id}"
 
@@ -14,7 +18,6 @@ resource "aws_s3_bucket" "security_logs" {
   }
 }
 
-
 resource "aws_s3_bucket_versioning" "security_logs" {
   bucket = aws_s3_bucket.security_logs.id
 
@@ -22,7 +25,6 @@ resource "aws_s3_bucket_versioning" "security_logs" {
     status = "Enabled"
   }
 }
-
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "security_logs" {
   bucket = aws_s3_bucket.security_logs.id
@@ -37,7 +39,6 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "security_logs" {
   }
 }
 
-
 resource "aws_s3_bucket_public_access_block" "security_logs" {
   bucket = aws_s3_bucket.security_logs.id
 
@@ -47,7 +48,6 @@ resource "aws_s3_bucket_public_access_block" "security_logs" {
   restrict_public_buckets = true
 }
 
-
 resource "aws_s3_bucket_ownership_controls" "security_logs" {
   bucket = aws_s3_bucket.security_logs.id
 
@@ -56,13 +56,11 @@ resource "aws_s3_bucket_ownership_controls" "security_logs" {
   }
 }
 
-
 resource "aws_s3_bucket_policy" "security_logs" {
   bucket = aws_s3_bucket.security_logs.id
 
   policy = data.aws_iam_policy_document.security_logs.json
 }
-
 
 data "aws_iam_policy_document" "security_logs" {
   statement {
@@ -109,6 +107,75 @@ data "aws_iam_policy_document" "security_logs" {
       variable = "s3:x-amz-server-side-encryption"
 
       values = ["aws:kms"]
+    }
+  }
+
+  statement {
+    sid    = "AWSCloudTrailAclCheck"
+    effect = "Allow"
+
+    principals {
+      type = "Service"
+
+      identifiers = [
+        "cloudtrail.amazonaws.com"
+      ]
+    }
+
+    actions = [
+      "s3:GetBucketAcl"
+    ]
+
+    resources = [
+      aws_s3_bucket.security_logs.arn
+    ]
+
+    condition {
+      test     = "StringEquals"
+      variable = "aws:SourceArn"
+
+      values = [
+        local.cloudtrail_arn
+      ]
+    }
+  }
+
+  statement {
+    sid    = "AWSCloudTrailWrite"
+    effect = "Allow"
+
+    principals {
+      type = "Service"
+
+      identifiers = [
+        "cloudtrail.amazonaws.com"
+      ]
+    }
+
+    actions = [
+      "s3:PutObject"
+    ]
+
+    resources = [
+      "${aws_s3_bucket.security_logs.arn}/cloudtrail/AWSLogs/${data.aws_caller_identity.current.account_id}/*"
+    ]
+
+    condition {
+      test     = "StringEquals"
+      variable = "s3:x-amz-acl"
+
+      values = [
+        "bucket-owner-full-control"
+      ]
+    }
+
+    condition {
+      test     = "StringEquals"
+      variable = "aws:SourceArn"
+
+      values = [
+        local.cloudtrail_arn
+      ]
     }
   }
 }
