@@ -72,3 +72,11 @@ module "inspector" {
   environment  = var.environment
   aws_region   = var.aws_region
 }
+
+module "macie" {
+  source = "./modules/macie"
+
+  project_name = var.project_name
+  environment  = var.environment
+  aws_region   = var.aws_region
+}

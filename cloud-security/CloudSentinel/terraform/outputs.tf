@@ -102,3 +102,13 @@ output "inspector_resource_types" {
   description = "Resource types monitored by Amazon Inspector"
   value       = module.inspector.inspector_resource_types
 }
+
+output "macie_status" {
+  description = "Amazon Macie account status"
+  value       = module.macie.macie_status
+}
+
+output "macie_finding_publishing_frequency" {
+  description = "Amazon Macie finding publishing frequency"
+  value       = module.macie.macie_finding_publishing_frequency
+}
