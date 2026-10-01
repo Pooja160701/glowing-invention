@@ -1,0 +1,21 @@
+Task ID,Task,Project,Section,Priority,Workstream,Release,Owner,Points,Dependency,Metric
+AS-001,Provider discovery,MVP Product Delivery,Ready for Development,P0,Patient Experience,0.2,Product/Engineering,5,Provider data model,Search-to-availability
+AS-002,Availability search,MVP Product Delivery,Ready for Development,P0,Scheduling,0.2,Engineering,5,AS-001,Availability success
+AS-003,Slot validation,MVP Product Delivery,In Progress,P0,Scheduling,0.3,Engineering,5,AS-002,Slot mismatch rate
+AS-004,Atomic booking,MVP Product Delivery,In Progress,P0,Scheduling,0.3,Engineering,8,AS-003,Booking success
+AS-005,Booking confirmation,MVP Product Delivery,Design / Review,P0,Patient Experience,0.3,Product/Engineering,3,AS-004,Confirmation success
+AS-006,Cancellation,MVP Product Delivery,Product Backlog,P0,Patient Experience,0.4,Product/Engineering,5,Appointment state model,Cancellation success
+AS-007,Rescheduling,MVP Product Delivery,Product Backlog,P0,Patient Experience,0.4,Product/Engineering,8,AS-002,Reschedule success
+AS-008,Reminder scheduler,MVP Product Delivery,Ready for Development,P0,Patient Experience,0.4,Engineering,5,AS-005,Notification delivery
+AS-009,Staff scheduling,MVP Product Delivery,Ready for Development,P0,Clinic Operations,0.3,Engineering,8,Schedule model,Schedule update success
+AS-010,Exception queue,MVP Product Delivery,Product Backlog,P0,Clinic Operations,0.5,Product/Engineering,8,Operational events,Exception resolution time
+AS-011,RBAC,MVP Product Delivery,In Progress,P0,Security & Privacy,0.5,Security/Engineering,5,Identity model,Authorization failures
+AS-012,Organization isolation,MVP Product Delivery,In Progress,P0,Security & Privacy,0.5,Security/Engineering,8,AS-011,Cross-org access violations
+AS-013,Audit logging,MVP Product Delivery,QA / Validation,P0,Security & Privacy,0.5,Security,5,AS-011,Audit coverage
+AS-014,Booking funnel instrumentation,Product Analytics & Optimization,Instrumentation,P0,Analytics,0.3,Data/Product,5,Event taxonomy,Search-to-book
+AS-015,Operational dashboard,Product Analytics & Optimization,Dashboard,P0,Analytics,0.5,Data/Product,8,AS-014,CCJR
+AS-016,Booking flow usability test,Product Discovery & Research,In Research,P0,Patient Experience,0.3,Product/Design,3,Booking prototype,Task completion
+AS-017,Notification failure analysis,Product Discovery & Research,Synthesis,P1,Patient Experience,0.4,Product/Operations,3,Reminder tracking,Failure recovery rate
+AS-018,Launch readiness review,Launch Readiness,Validation,P0,Launch,1.0,Product/Operations,5,Critical MVP work,Launch readiness
+AS-019,Production monitoring validation,Launch Readiness,Validation,P0,Launch,1.0,Engineering,5,Observability,Core availability
+AS-020,Post-launch feedback synthesis,Launch Readiness,Post-Launch,P0,Launch,1.0,Product,3,Launch,Feedback theme count
