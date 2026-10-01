@@ -1,0 +1,26 @@
+Feature ID,Feature,Area,Persona,Priority,Status,Release,Outcome,Requirement
+F-001,Provider discovery,Discovery,Patient,P0,Planned,0.2,Patients find relevant providers,R-001
+F-002,Availability search,Scheduling,Patient,P0,Planned,0.2,Patients see valid slots,R-002
+F-003,Slot validation,Scheduling,Patient,P0,Planned,0.3,Prevent stale bookings,R-002
+F-004,Appointment booking,Booking,Patient,P0,Planned,0.3,Complete reliable bookings,R-003
+F-005,Booking confirmation,Booking,Patient,P0,Planned,0.3,Provide trusted confirmation,R-004
+F-006,Appointment details,Management,Patient,P0,Planned,0.4,Understand upcoming appointment,R-004
+F-007,Cancellation,Management,Patient,P0,Planned,0.4,Enable self-service cancellation,R-007
+F-008,Rescheduling,Management,Patient,P0,Planned,0.4,Enable self-service changes,R-006
+F-009,Appointment history,Management,Patient,P0,Planned,0.4,Review administrative history,R-004
+F-010,Reminder scheduler,Communications,Patient,P0,Planned,0.4,Improve appointment communication,R-005
+F-011,Communication preferences,Communications,Patient,P0,Planned,0.4,Respect supported preferences,R-008
+F-012,Notification status,Communications,Staff,P0,Planned,0.4,Identify delivery failures,R-005
+F-013,Staff scheduling,Operations,Staff,P0,Planned,0.3,Maintain availability,R-009
+F-014,Staff appointment management,Operations,Staff,P0,Planned,0.4,Manage appointments,R-009
+F-015,Exception queue,Operations,Staff,P0,Planned,0.5,Resolve operational failures,R-010
+F-016,RBAC,Security,Admin,P0,Planned,0.5,Protect access,R-011
+F-017,Organization isolation,Security,Admin,P0,Planned,0.5,Prevent cross-org access,R-011
+F-018,Audit logging,Security,Admin,P0,Planned,0.5,Support accountability,R-011
+F-019,Privacy-safe analytics,Security,Admin,P0,Planned,0.5,Reduce analytics privacy risk,R-011
+F-020,Booking funnel analytics,Analytics,Product,P0,Planned,0.3,Measure conversion,R-012
+F-021,Operational analytics,Analytics,Operations,P0,Planned,0.5,Measure exception performance,R-012
+F-022,Reliability telemetry,Analytics,Engineering,P0,Planned,1.0,Detect service degradation,R-012
+F-023,Secure administrative messaging,Communications,Patient/Staff,P1,Candidate,Post-1.0,Support controlled admin communication,R-015
+F-024,Advanced scheduling,Scheduling,Staff,P1,Candidate,Post-1.0,Support complex constraints,R-013
+F-025,External integrations,Integrations,Admin,P1,Candidate,Post-1.0,Reduce duplicate schedule maintenance,R-014
