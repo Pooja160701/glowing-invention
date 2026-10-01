@@ -72,3 +72,18 @@ output "securityhub_enabled" {
   description = "Whether Security Hub is enabled"
   value       = module.security_services.securityhub_enabled
 }
+
+output "config_recorder_name" {
+  description = "AWS Config recorder name"
+  value       = module.config.config_recorder_name
+}
+
+output "config_delivery_channel_name" {
+  description = "AWS Config delivery channel name"
+  value       = module.config.config_delivery_channel_name
+}
+
+output "config_role_arn" {
+  description = "AWS Config IAM role ARN"
+  value       = module.config.config_role_arn
+}

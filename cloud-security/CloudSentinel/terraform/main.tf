@@ -53,3 +53,14 @@ module "security_services" {
   environment  = var.environment
   aws_region   = var.aws_region
 }
+
+module "config" {
+  source = "./modules/config"
+
+  project_name = var.project_name
+  environment  = var.environment
+  aws_region   = var.aws_region
+
+  security_logs_bucket_name = module.security_logging.security_logs_bucket_id
+  kms_key_arn               = module.kms.security_key_arn
+}
