@@ -1,0 +1,13 @@
+Epic Key,Epic Name,Summary,Outcome,Priority
+MED-E01,Patient Account & Access,Secure patient access and preferences,Patients can securely access and manage their appointment experience,P0
+MED-E02,Provider Discovery,Provider and clinic discovery,Patients can find relevant care options,P0
+MED-E03,Availability & Scheduling,Accurate appointment availability,Patients see valid bookable slots,P0
+MED-E04,Appointment Booking,Reliable appointment booking,Patients can complete bookings without false confirmations,P0
+MED-E05,Appointment Management,Self-service appointment changes,Patients can cancel and reschedule eligible appointments,P0
+MED-E06,Patient Communications,Appointment confirmations and reminders,Patients receive useful privacy-aware communications,P0
+MED-E07,Staff Operations,Clinic scheduling operations,Staff can manage schedules and appointments efficiently,P0
+MED-E08,Exception Management,Operational exception handling,Staff can identify and resolve scheduling failures,P0
+MED-E09,Security Privacy Governance,Access control and auditability,Sensitive administrative data is appropriately protected,P0
+MED-E10,Analytics Operations,Product and operational measurement,Teams can measure the administrative journey,P0
+MED-E11,Advanced Scheduling,Complex scheduling capabilities,Organizations can model more complex appointment constraints,P1
+MED-E12,Integrations,External scheduling synchronization,Organizations can reduce duplicate schedule maintenance,P1
