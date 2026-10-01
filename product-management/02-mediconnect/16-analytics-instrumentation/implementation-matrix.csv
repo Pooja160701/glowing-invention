@@ -1,0 +1,17 @@
+Event,Priority,Surface,Owner,Analytics Tools,QA Method,Primary Metric
+provider_search_started,P0,Patient web,Product/Data,Mixpanel|Amplitude|PostHog|GA4,Event payload test,Search volume
+availability_viewed,P0,Patient web,Product/Data,Mixpanel|Amplitude|PostHog|GA4,Availability-to-event reconciliation,Availability view rate
+slot_selected,P0,Patient web,Product/Data,Mixpanel|Amplitude|PostHog|GA4,Selected-slot test,Slot selection rate
+booking_submitted,P0,Booking API,Engineering,Mixpanel|Amplitude|PostHog,API event contract test,Booking attempt volume
+booking_succeeded,P0,Booking API,Engineering/Data,Mixpanel|Amplitude|PostHog|GA4,Database-to-event reconciliation,Booking success rate
+booking_failed,P0,Booking API,Engineering/Data,Mixpanel|Amplitude|PostHog,Failure-path test,Booking failure rate
+appointment_viewed,P0,Patient web,Product/Data,Mixpanel|Amplitude|PostHog|GA4,UI event test,Appointment engagement
+appointment_cancelled,P0,Patient web/API,Engineering/Data,Mixpanel|Amplitude|PostHog,State-transition test,Cancellation success
+appointment_rescheduled,P0,Patient web/API,Engineering/Data,Mixpanel|Amplitude|PostHog,State-transition test,Reschedule success
+reminder_sent,P0,Notification service,Engineering,PostHog|Mixpanel|BI,Provider reconciliation,Notification send rate
+reminder_delivered,P0,Notification service,Engineering/Data,PostHog|Mixpanel|BI,Provider delivery reconciliation,Delivery success
+reminder_failed,P0,Notification service,Engineering/Data,PostHog|Mixpanel|BI,Failure-path test,Delivery failure
+exception_created,P0,Operations,Operations/Data,PostHog|BI,Queue reconciliation,Exception volume
+exception_resolved,P0,Operations,Operations/Data,PostHog|BI,State-transition test,Resolution time
+authorization_denied,P0,Security,Security,PostHog|BI,Security test,Authorization failure rate
+api_error,P0,Platform,Engineering,PostHog|BI,Fault injection,Error rate
