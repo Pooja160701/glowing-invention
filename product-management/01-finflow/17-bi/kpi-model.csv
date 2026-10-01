@@ -1,0 +1,11 @@
+kpi_id,kpi_name,definition,formula,grain,owner,source
+KPI-001,WAFAU,Unique users completing a meaningful financial action in seven days,COUNT DISTINCT user_id with qualifying action,Weekly,Product,Product events
+KPI-002,Activation Rate,Users completing first financial action divided by eligible onboarded users,Activated users / eligible users,Weekly,Product,Product events
+KPI-003,Import Completion Rate,Successful imports divided by import starts,Completed imports / import starts,Weekly,Data,Import events
+KPI-004,Time to First Action,Median time from onboarding completion to first meaningful action,MEDIAN(first_action_time-onboarding_time),Weekly,Product,Product events
+KPI-005,Week-4 Retention,Activated users returning in week four and completing a meaningful action,Retained W4 users / eligible activated cohort,Weekly,Product,Product events
+KPI-006,Categorization Correction Rate,Corrected categorized transactions divided by categorized transactions,Corrections / categorized transactions,Weekly,Data,Transaction events
+KPI-007,Import Failure Rate,Failed imports divided by import starts,Failed imports / import starts,Weekly,Engineering,Import events
+KPI-008,Insight Action Rate,Users acting on an insight divided by users viewing an insight,Insight actioners / insight viewers,Weekly,Product,Insight events
+KPI-009,Notification Opt-out Rate,Users disabling notifications divided by users receiving eligible notifications,Opt-outs / eligible recipients,Weekly,Product,Preference events
+KPI-010,Support Contact Rate,Active users creating support contacts divided by active users,Support contacts / active users,Weekly,Support,Support events
