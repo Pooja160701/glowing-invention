@@ -16,3 +16,19 @@ module "iam" {
   project_name = var.project_name
   environment  = var.environment
 }
+
+module "kms" {
+  source = "./modules/kms"
+
+  project_name = var.project_name
+  environment  = var.environment
+}
+
+
+module "security_logging" {
+  source = "./modules/security-logging"
+
+  project_name = var.project_name
+  environment  = var.environment
+  kms_key_arn  = module.kms.security_key_arn
+}

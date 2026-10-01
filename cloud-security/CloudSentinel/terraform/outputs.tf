@@ -22,3 +22,28 @@ output "environment" {
   description = "CloudSentinel environment"
   value       = var.environment
 }
+
+output "security_kms_key_id" {
+  description = "CloudSentinel security KMS key ID"
+  value       = module.kms.security_key_id
+}
+
+output "security_kms_key_arn" {
+  description = "CloudSentinel security KMS key ARN"
+  value       = module.kms.security_key_arn
+}
+
+output "security_kms_key_alias" {
+  description = "CloudSentinel security KMS key alias"
+  value       = module.kms.security_key_alias
+}
+
+output "security_logs_bucket" {
+  description = "CloudSentinel centralized security logging bucket"
+  value       = module.security_logging.security_logs_bucket_id
+}
+
+output "security_logs_bucket_arn" {
+  description = "CloudSentinel centralized security logging bucket ARN"
+  value       = module.security_logging.security_logs_bucket_arn
+}
