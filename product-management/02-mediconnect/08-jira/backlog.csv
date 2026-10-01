@@ -1,0 +1,40 @@
+Issue Type,Issue Key,Summary,Epic,Priority,Story Points,Release,Labels
+Story,MED-101,Create patient account,MED-E01,P0,3,0.3,patient
+Story,MED-102,Secure patient sign in,MED-E01,P0,3,0.3,security
+Story,MED-103,Manage communication preferences,MED-E01,P0,3,0.4,preferences
+Story,MED-104,Search providers,MED-E02,P0,5,0.2,discovery
+Story,MED-105,Filter provider results,MED-E02,P0,3,0.2,discovery
+Story,MED-106,View provider details,MED-E02,P0,3,0.2,discovery
+Story,MED-107,View available appointment slots,MED-E03,P0,5,0.2,scheduling
+Story,MED-108,Display appointment time zone,MED-E03,P0,2,0.2,scheduling
+Story,MED-109,Prevent stale slot booking,MED-E03,P0,5,0.3,concurrency
+Story,MED-110,Book appointment,MED-E04,P0,5,0.3,booking
+Story,MED-111,Confirm appointment,MED-E04,P0,3,0.3,booking
+Story,MED-112,Prevent duplicate booking,MED-E04,P0,5,0.3,idempotency
+Story,MED-113,View appointment details,MED-E05,P0,3,0.4,patient
+Story,MED-114,Cancel appointment,MED-E05,P0,3,0.4,patient
+Story,MED-115,Reschedule appointment,MED-E05,P0,5,0.4,patient
+Story,MED-116,Preserve appointment on failed reschedule,MED-E05,P0,5,0.4,reliability
+Story,MED-117,View appointment history,MED-E05,P0,3,0.4,patient
+Story,MED-118,Send booking confirmation,MED-E06,P0,3,0.3,notifications
+Story,MED-119,Send appointment reminders,MED-E06,P0,5,0.4,notifications
+Story,MED-120,Track notification status,MED-E06,P0,3,0.4,notifications
+Story,MED-121,Manage provider availability,MED-E07,P0,5,0.3,staff
+Story,MED-122,View staff appointment schedule,MED-E07,P0,3,0.4,staff
+Story,MED-123,Update provider availability,MED-E07,P0,5,0.4,staff
+Story,MED-124,Manage appointment administratively,MED-E07,P0,5,0.4,staff
+Story,MED-125,Create scheduling exception,MED-E08,P0,5,0.5,exceptions
+Story,MED-126,Review exception queue,MED-E08,P0,5,0.5,exceptions
+Story,MED-127,Assign exception,MED-E08,P0,3,0.5,exceptions
+Story,MED-128,Resolve exception,MED-E08,P0,5,0.5,exceptions
+Story,MED-129,Track notification failure,MED-E08,P0,3,0.5,exceptions
+Story,MED-130,Enforce role-based access,MED-E09,P0,5,0.5,security
+Story,MED-131,Enforce organization isolation,MED-E09,P0,5,0.5,security
+Story,MED-132,Audit administrative actions,MED-E09,P0,5,0.5,audit
+Story,MED-133,Minimize analytics data,MED-E09,P0,3,0.5,privacy
+Story,MED-134,Track booking funnel,MED-E10,P0,3,0.6,analytics
+Story,MED-135,Track operational performance,MED-E10,P0,3,0.6,analytics
+Story,MED-136,Track scheduling reliability,MED-E10,P0,3,0.6,observability
+Story,MED-137,Secure administrative messaging,MED-E10,P1,5,1.0,messaging
+Story,MED-138,Advanced scheduling constraints,MED-E11,P1,8,1.0,scheduling
+Story,MED-139,External schedule synchronization,MED-E12,P1,8,1.0,integration
