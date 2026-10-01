@@ -1,0 +1,23 @@
+story_id,epic,title,priority,requirement,status,dependency
+US-001,Onboarding,Create Profile,P0,Product setup,Backlog,None
+US-002,Onboarding,Understand Data Use,P0,Privacy by design,Backlog,US-001
+US-003,Transaction Import,Import Transactions,P0,FR-001,Backlog,US-001
+US-004,Transaction Import,Review Import Errors,P0,FR-001,Backlog,US-003
+US-005,Transaction Import,View Categorized Transactions,P0,FR-002,Backlog,US-003
+US-006,Transaction Import,Correct a Category,P0,FR-002,Backlog,US-005
+US-007,Dashboard,View Financial Summary,P0,FR-003,Backlog,US-005
+US-008,Dashboard,Explore Spending Categories,P0,FR-003,Backlog,US-007
+US-009,Budget Management,Create Budget,P0,FR-004,Backlog,US-007
+US-010,Budget Management,Monitor Budget,P0,FR-004,Backlog,US-009
+US-011,Budget Management,Edit Budget,P0,FR-004,Backlog,US-009
+US-012,Savings Goals,Create Savings Goal,P0,FR-005,Backlog,US-007
+US-013,Savings Goals,View Goal Progress,P0,FR-005,Backlog,US-012
+US-014,Financial Insights,View Insight,P0,FR-006,Backlog,US-007
+US-015,Financial Insights,Understand Insight,P0,FR-006,Backlog,US-014
+US-016,Financial Insights,Act on Insight,P1,FR-006,Backlog,US-015
+US-017,Notifications,Configure Notifications,P1,FR-007,Backlog,US-001
+US-018,Notifications,Receive Budget Event,P1,FR-007,Backlog,US-010
+US-019,Analytics,Track Product Events,P0,Analytics,Backlog,US-001
+US-020,Analytics,Track Insight Feedback,P1,Metrics,Backlog,US-014
+US-021,Privacy,Review Data Controls,P0,Privacy,Backlog,US-001
+US-022,Privacy,Delete Financial Data,P0,Privacy,Backlog,US-021
