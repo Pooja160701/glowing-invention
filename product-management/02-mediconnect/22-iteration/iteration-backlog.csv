@@ -1,0 +1,9 @@
+Iteration ID,Signal,Source,Finding,Action Type,Priority,Linked Metric,Next Action,Status
+IT-001,Availability confidence friction,Feedback + research,Users may hesitate when slot freshness is unclear,Experiment,P0,Search-to-book conversion,Run EXP-002,Planned
+IT-002,Rescheduling discoverability,Feedback + usability,Self-service change entry point may be too hidden,Experiment,P0,Reschedule completion,Run EXP-003,Planned
+IT-003,Exception aging,Operations + BI,Older exceptions may consume disproportionate staff effort,Optimize,P0,Median exception resolution time,Validate prioritization,Planned
+IT-004,Notification failures,Analytics + support,Delivery failures need faster recovery visibility,Build,P0,Notification delivery rate,Improve exception handling,Planned
+IT-005,Booking retries,Reliability,Retries can create duplicate-booking risk,Fix,P0,Duplicate booking rate,Review idempotency,Planned
+IT-006,Privacy transparency,Feedback + research,Users may need clearer explanation of administrative data use,Research,P1,Privacy feedback,Conduct UX research,Planned
+IT-007,Operational reporting,Feedback + research,Administrators need more actionable reporting,Research,P1,Operational dashboard usage,Validate reporting jobs,Planned
+IT-008,Advanced scheduling,Strategy + roadmap,Complex scheduling needs remain outside MVP,Monitor,P1,Staff workflow feedback,Collect evidence,Planned
