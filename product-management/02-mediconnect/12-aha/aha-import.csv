@@ -1,0 +1,25 @@
+Item Type,Name,Parent,Goal,Release,Priority,Status
+Goal,Improve appointment access,,Appointment access,,P0,Active
+Goal,Reduce administrative appointment friction,,Administrative efficiency,,P0,Active
+Goal,Improve operational reliability,,Operational reliability,,P0,Active
+Goal,Establish trust and governance,,Security and privacy,,P0,Active
+Goal,Build a measurable product,,Measurement,,P0,Active
+Initiative,Reliable Appointment Access,Improve appointment access,,0.2-0.3,P0,Planned
+Initiative,Self-Service Patient Journey,Reduce administrative appointment friction,,0.4,P0,Planned
+Initiative,Clinic Operational Control,Improve operational reliability,,0.3-0.5,P0,Planned
+Initiative,Exception Operations,Improve operational reliability,,0.5,P0,Planned
+Initiative,Trust & Governance,Establish trust and governance,,0.5,P0,Planned
+Initiative,Product Analytics & Observability,Build a measurable product,,0.3-1.0,P0,Planned
+Initiative,Workflow Expansion,Improve operational reliability,,Post-1.0,P1,Candidate
+Feature,Provider discovery,Reliable Appointment Access,Improve appointment access,0.2,P0,Planned
+Feature,Availability search,Reliable Appointment Access,Improve appointment access,0.2,P0,Planned
+Feature,Slot validation,Reliable Appointment Access,Improve appointment access,0.3,P0,Planned
+Feature,Appointment booking,Reliable Appointment Access,Improve appointment access,0.3,P0,Planned
+Feature,Cancellation,Self-Service Patient Journey,Reduce administrative appointment friction,0.4,P0,Planned
+Feature,Rescheduling,Self-Service Patient Journey,Reduce administrative appointment friction,0.4,P0,Planned
+Feature,Exception queue,Exception Operations,Improve operational reliability,0.5,P0,Planned
+Feature,RBAC,Trust & Governance,Establish trust and governance,0.5,P0,Planned
+Feature,Audit logging,Trust & Governance,Establish trust and governance,0.5,P0,Planned
+Feature,Booking funnel,Product Analytics & Observability,Build a measurable product,0.3,P0,Planned
+Feature,Advanced scheduling,Workflow Expansion,Improve operational reliability,Post-1.0,P1,Candidate
+Feature,External integrations,Workflow Expansion,Improve operational reliability,Post-1.0,P1,Candidate
