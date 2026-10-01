@@ -1,0 +1,9 @@
+Experiment ID,Experiment,Area,Hypothesis,Primary Metric,Guardrails,Priority,Status
+EXP-001,Booking progress indicator,Booking,Showing explicit progress will reduce booking abandonment,Booking completion rate,Booking failure rate|Page errors,P0,Planned
+EXP-002,Availability confidence message,Discovery,Explaining slot freshness will increase confidence and reduce abandonment,Availability-to-book conversion,Slot mismatch rate|Search latency,P0,Planned
+EXP-003,Self-service reschedule entry point,Management,Making reschedule more visible will increase successful self-service changes,Reschedule completion rate,Support contacts|Change errors,P0,Planned
+EXP-004,Reminder preference presentation,Communications,Clarifying reminder choices will improve preference completion,Preference completion rate,Notification failure|Opt-out errors,P1,Planned
+EXP-005,Exception queue prioritization,Operations,Prioritizing exceptions by age and severity will reduce resolution time,Median exception resolution time,Unresolved critical exceptions|Staff workload,P0,Planned
+EXP-006,Booking confirmation clarity,Booking,Improving confirmation content will reduce repeat booking attempts,Repeat booking attempt rate,Duplicate booking rate|Support contacts,P1,Planned
+EXP-007,Availability filter defaults,Discovery,Improving default filters will reduce search effort,Search-to-slot-selection rate,Availability coverage|Search latency,P1,Planned
+EXP-008,Notification retry messaging,Communications,Showing operational recovery status will reduce staff uncertainty,Notification exception resolution time,Duplicate notifications|Delivery failures,P1,Planned
