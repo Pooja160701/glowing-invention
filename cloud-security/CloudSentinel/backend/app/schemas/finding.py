@@ -1,15 +1,20 @@
 from datetime import datetime
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from app.models.finding import (
-    AssetType,
     FindingAsset,
     FindingRisk,
     FindingSeverity,
     FindingSource,
-    FindingStatus,
     FindingType,
     NormalizedFinding,
 )
+
+class FindingRiskInput(BaseModel):
+    severity_score: float = Field(ge=0, le=10)
+    asset_criticality: float = Field(ge=0, le=10)
+    exploitability: float = Field(ge=0, le=10)
+    exposure: float = Field(ge=0, le=10)
+    data_sensitivity: float = Field(ge=0, le=10)
 
 class FindingCreate(BaseModel):
     source: FindingSource
@@ -24,15 +29,15 @@ class FindingCreate(BaseModel):
 
     asset: FindingAsset
 
-    risk: FindingRisk
+    risk: FindingRiskInput
 
     remediation: str | None = None
 
     first_seen: datetime
     last_seen: datetime
 
-    tags: list[str] = []
-    metadata: dict[str, object] = {}
+    tags: list[str] = Field(default_factory=list)
+    metadata: dict[str, object] = Field(default_factory=dict)
 
 class FindingResponse(NormalizedFinding):
     pass
