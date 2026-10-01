@@ -1,0 +1,39 @@
+Issue ID,Project,Cycle,Type,Title,Priority,Estimate,Labels
+MED-L001,P01 Patient Discovery,C1,Issue,Patient account creation,P0,3,patient
+MED-L002,P01 Patient Discovery,C1,Issue,Provider search,P0,5,discovery
+MED-L003,P01 Patient Discovery,C1,Issue,Provider filters,P0,3,discovery
+MED-L004,P01 Patient Discovery,C1,Issue,Provider detail page,P0,3,discovery
+MED-L005,P01 Patient Discovery,C1,Issue,Availability view,P0,5,scheduling
+MED-L006,P02 Availability & Booking,C2,Issue,Server-side slot validation,P0,5,booking
+MED-L007,P02 Availability & Booking,C2,Issue,Atomic appointment reservation,P0,8,concurrency
+MED-L008,P02 Availability & Booking,C2,Issue,Time-zone handling,P0,3,scheduling
+MED-L009,P02 Availability & Booking,C2,Issue,Concurrent booking tests,P0,5,qa
+MED-L010,P02 Availability & Booking,C3,Issue,Create appointment API,P0,5,api
+MED-L011,P02 Availability & Booking,C3,Issue,Booking confirmation,P0,3,booking
+MED-L012,P02 Availability & Booking,C3,Issue,Idempotent booking requests,P0,5,reliability
+MED-L013,P03 Appointment Management,C4,Issue,Appointment details,P0,3,patient
+MED-L014,P03 Appointment Management,C4,Issue,Cancellation workflow,P0,3,patient
+MED-L015,P03 Appointment Management,C4,Issue,Rescheduling workflow,P0,5,patient
+MED-L016,P03 Appointment Management,C4,Issue,Failed-reschedule recovery,P0,5,reliability
+MED-L017,P03 Appointment Management,C4,Issue,Appointment history,P0,3,patient
+MED-L018,P04 Patient Communications,C4,Issue,Booking confirmation notification,P0,3,notifications
+MED-L019,P04 Patient Communications,C4,Issue,Reminder scheduler,P0,5,notifications
+MED-L020,P04 Patient Communications,C4,Issue,Communication preferences,P0,3,privacy
+MED-L021,P04 Patient Communications,C4,Issue,Notification delivery tracking,P0,3,observability
+MED-L022,P05 Staff Scheduling,C3,Issue,Staff availability management,P0,5,staff
+MED-L023,P05 Staff Scheduling,C4,Issue,Staff appointment schedule,P0,3,staff
+MED-L024,P05 Staff Scheduling,C4,Issue,Administrative appointment updates,P0,5,staff
+MED-L025,P06 Exception Operations,C5,Issue,Exception creation service,P0,5,exceptions
+MED-L026,P06 Exception Operations,C5,Issue,Exception queue,P0,5,exceptions
+MED-L027,P06 Exception Operations,C5,Issue,Exception assignment,P0,3,operations
+MED-L028,P06 Exception Operations,C5,Issue,Exception resolution,P0,5,operations
+MED-L029,P06 Exception Operations,C5,Issue,Notification failure workflow,P0,3,notifications
+MED-L030,P07 Security & Governance,C6,Issue,Role-based authorization,P0,5,security
+MED-L031,P07 Security & Governance,C6,Issue,Organization isolation,P0,5,security
+MED-L032,P07 Security & Governance,C6,Issue,Administrative audit logs,P0,5,audit
+MED-L033,P07 Security & Governance,C6,Issue,Analytics privacy validation,P0,3,privacy
+MED-L034,P08 Analytics & Observability,C3,Issue,Booking funnel events,P0,3,analytics
+MED-L035,P08 Analytics & Observability,C5,Issue,Operational metrics,P0,3,analytics
+MED-L036,P08 Analytics & Observability,C6,Issue,Reliability telemetry,P0,3,observability
+MED-L037,P09 Advanced Scheduling,Post-MVP,Issue,Configurable scheduling constraints,P1,8,scheduling
+MED-L038,P10 External Integrations,Post-MVP,Issue,External schedule synchronization,P1,8,integration
