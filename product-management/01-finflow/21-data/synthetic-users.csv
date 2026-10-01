@@ -1,0 +1,16 @@
+user_id,signup_date,platform,acquisition_source,segment
+U001,2026-08-03,Web,Organic,Early-career
+U002,2026-08-03,Web,Search,Budget-conscious
+U003,2026-08-04,Mobile,Referral,Goal-oriented
+U004,2026-08-05,Web,Organic,Early-career
+U005,2026-08-06,Mobile,Social,Budget-conscious
+U006,2026-08-10,Web,Search,Goal-oriented
+U007,2026-08-11,Mobile,Referral,Early-career
+U008,2026-08-12,Web,Organic,Budget-conscious
+U009,2026-08-13,Mobile,Social,Goal-oriented
+U010,2026-08-17,Web,Search,Early-career
+U011,2026-08-18,Mobile,Organic,Budget-conscious
+U012,2026-08-19,Web,Referral,Goal-oriented
+U013,2026-08-20,Mobile,Search,Early-career
+U014,2026-08-24,Web,Organic,Budget-conscious
+U015,2026-08-25,Mobile,Referral,Goal-oriented
