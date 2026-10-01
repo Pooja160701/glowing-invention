@@ -1,0 +1,15 @@
+test_id,endpoint,scenario,expected_status,expected_result
+API-001,GET /me,Valid authenticated user,200,Returns user profile without secrets
+API-002,GET /me,Missing token,401,Authentication error
+API-003,POST /imports,Valid CSV import request,202,Import accepted
+API-004,POST /imports,Duplicate idempotency key,200_or_202,No duplicate import created
+API-005,POST /imports,Invalid source type,400,Validation error
+API-006,GET /transactions,Valid cursor pagination,200,Stable page and next cursor
+API-007,PATCH /transactions/{id},Valid category change,200,Category updated
+API-008,PATCH /transactions/{id},Unknown transaction,404,Not found error
+API-009,POST /budgets,Valid budget,201,Budget created
+API-010,POST /budgets,Invalid budget data,422,Validation error
+API-011,GET /insights,Valid user,200,Only authorized insights returned
+API-012,PUT /notifications/preferences,Valid preferences,200,Preferences updated
+API-013,POST /feedback,Valid structured feedback,201,Feedback accepted
+API-014,Any mutation,Excessive request rate,429,Rate limit response
