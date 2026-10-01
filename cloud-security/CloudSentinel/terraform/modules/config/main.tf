@@ -66,3 +66,55 @@ resource "aws_config_configuration_recorder_status" "security" {
     aws_config_delivery_channel.security
   ]
 }
+
+resource "aws_config_config_rule" "s3_public_read_prohibited" {
+  name = "${var.project_name}-${var.environment}-s3-public-read-prohibited"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "S3_BUCKET_PUBLIC_READ_PROHIBITED"
+  }
+
+  depends_on = [
+    aws_config_configuration_recorder_status.security
+  ]
+}
+
+resource "aws_config_config_rule" "restricted_ssh" {
+  name = "${var.project_name}-${var.environment}-restricted-ssh"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "INCOMING_SSH_DISABLED"
+  }
+
+  depends_on = [
+    aws_config_configuration_recorder_status.security
+  ]
+}
+
+resource "aws_config_config_rule" "encrypted_volumes" {
+  name = "${var.project_name}-${var.environment}-encrypted-volumes"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "ENCRYPTED_VOLUMES"
+  }
+
+  depends_on = [
+    aws_config_configuration_recorder_status.security
+  ]
+}
+
+resource "aws_config_config_rule" "cloudtrail_enabled" {
+  name = "${var.project_name}-${var.environment}-cloudtrail-enabled"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "CLOUD_TRAIL_ENABLED"
+  }
+
+  depends_on = [
+    aws_config_configuration_recorder_status.security
+  ]
+}

@@ -87,3 +87,8 @@ output "config_role_arn" {
   description = "AWS Config IAM role ARN"
   value       = module.config.config_role_arn
 }
+
+output "config_rule_names" {
+  description = "AWS Config compliance rules managed by CloudSentinel"
+  value       = module.config.config_rule_names
+}
