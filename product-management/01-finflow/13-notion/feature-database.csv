@@ -1,0 +1,11 @@
+feature_id,name,initiative,priority,status,problem,success_metric,target_release,owner
+F-001,Transaction Import,Financial Data Foundation,P0,Backlog,Manual financial data entry,Import completion rate,R0.2,Product
+F-002,Automatic Categorization,Financial Data Foundation,P0,Backlog,Manual categorization,Categorization correction rate,R0.2,Product
+F-003,Category Correction,Financial Data Foundation,P0,Backlog,Incorrect categories,Correction success rate,R0.2,Product
+F-004,Financial Dashboard,Financial Clarity,P0,Backlog,Weak spending visibility,Dashboard activation,R0.2,Product
+F-005,Budget Creation,Budget Control,P0,Backlog,No structured spending plan,Budget creation rate,R0.3,Product
+F-006,Budget Monitoring,Budget Control,P0,Backlog,Late overspending awareness,Budget monitoring rate,R0.3,Product
+F-007,Savings Goals,Financial Wellness,P0,Backlog,Goal progress unclear,Goal creation rate,R0.3,Product
+F-008,Explainable Insights,Financial Wellness,P0,Backlog,Generic or unclear insights,Insight action rate,R0.4,Product
+F-009,Notification Preferences,Engagement,P1,Backlog,Notification fatigue,Notification opt-out rate,R0.4,Product
+F-010,Recurring Expense Detection,Financial Wellness,P1,Backlog,Recurring expenses overlooked,Review rate,R0.4,Product
