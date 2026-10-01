@@ -1,0 +1,41 @@
+story_id,epic,title,persona,priority,prd_ids,status,dependency
+US-001,EP-01,View inventory by SKU and location,Inventory Planner,P0,FR-001;FR-002,Backlog,Data model
+US-002,EP-01,See inventory position components,Inventory Planner,P0,FR-002,Backlog,Inventory feed
+US-003,EP-01,See inventory value and aging,Inventory Planner,P0,FR-001,Backlog,Inventory data
+US-004,EP-01,See source and freshness,Operations Manager,P0,FR-003;FR-024,Backlog,Lineage model
+US-005,EP-02,Review demand history,Inventory Planner,P0,FR-012,Backlog,Demand feed
+US-006,EP-02,View forecast input,Inventory Planner,P0,FR-012;FR-015,Backlog,Forecast integration
+US-007,EP-02,View open purchase orders,Procurement Manager,P0,FR-012;FR-017,Backlog,PO integration
+US-008,EP-02,Compare demand and supply,Inventory Planner,P0,FR-012,Backlog,Demand and supply model
+US-009,EP-03,Detect stockout risk,Inventory Planner,P0,FR-004,Backlog,Inventory and demand data
+US-010,EP-03,Detect excess inventory,Inventory Planner,P0,FR-005,Backlog,Inventory aging logic
+US-011,EP-03,Detect late purchase orders,Procurement Manager,P0,FR-006,Backlog,PO data
+US-012,EP-03,Detect lead-time deviation,Procurement Manager,P0,FR-007,Backlog,Lead-time history
+US-013,EP-03,Prioritize exceptions,Operations Manager,P0,FR-009,Backlog,Exception scoring
+US-014,EP-03,Filter exception queue,Inventory Planner,P0,FR-009,Backlog,Exception index
+US-015,EP-03,Assign an exception owner,Operations Manager,P0,FR-010,Backlog,User/role model
+US-016,EP-03,Track exception status,Inventory Planner,P0,FR-011;FR-025,Backlog,Exception workflow
+US-017,EP-03,View exception context,Planner,P0,FR-012;FR-017;FR-024,Backlog,Unified context API
+US-018,EP-04,Receive reorder recommendation,Inventory Planner,P0,FR-013,Backlog,Recommendation service
+US-019,EP-04,Understand recommendation rationale,Inventory Planner,P0,FR-013;FR-015,Backlog,Explanation model
+US-020,EP-04,Review recommendation inputs,Procurement Manager,P0,FR-015,Backlog,Context API
+US-021,EP-04,Approve recommendation,Authorized Planner,P0,FR-014,Backlog,Authorization
+US-022,EP-04,Edit recommendation,Authorized Planner,P0,FR-014,Backlog,Recommendation workflow
+US-023,EP-04,Reject recommendation,Authorized Planner,P0,FR-014;FR-020,Backlog,Audit log
+US-024,EP-04,Preserve decision history,Auditor,P0,FR-020,Backlog,Audit model
+US-025,EP-05,View supplier performance,Procurement Manager,P1,FR-016,Backlog,Supplier metrics
+US-026,EP-05,Link supplier risk to inventory,Procurement Manager,P0,FR-017,Backlog,Entity relationships
+US-027,EP-05,See expected receipt changes,Procurement Manager,P0,FR-006;FR-017,Backlog,PO change feed
+US-028,EP-05,Track supplier exception action,Procurement Manager,P1,FR-011;FR-025,Backlog,Exception workflow
+US-029,EP-06,Detect data-quality exceptions,Operations Manager,P0,FR-008;FR-024,Backlog,Quality rules
+US-030,EP-06,Trace decision data,Auditor,P0,FR-003;FR-020,Backlog,Lineage model
+US-031,EP-06,View degraded-data state,Planner,P0,FR-024,Backlog,Freshness service
+US-032,EP-06,Resolve data-quality issue,Operations Manager,P0,FR-025,Backlog,Quality workflow
+US-033,EP-07,Enforce role-based access,Administrator,P0,FR-020,Backlog,Identity service
+US-034,EP-07,Audit material actions,Auditor,P0,FR-020,Backlog,Audit service
+US-035,EP-07,Configure approval boundaries,Administrator,P1,FR-022,Backlog,Policy engine
+US-036,EP-08,View inventory health KPIs,Supply Chain Leader,P1,FR-018,Backlog,Metrics layer
+US-037,EP-08,Drill from KPI to exceptions,Supply Chain Leader,P1,FR-018,Backlog,Analytics navigation
+US-038,EP-09,Ingest source data idempotently,Data Engineer,P0,INT-002;INT-004,Backlog,Ingestion framework
+US-039,EP-09,Monitor integration health,Administrator,P0,INT-005;INT-006;INT-009;INT-010,Backlog,Observability
+US-040,EP-10,Configure exception thresholds,Administrator,P1,FR-021,Backlog,Rules engine

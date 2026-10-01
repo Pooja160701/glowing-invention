@@ -1,0 +1,32 @@
+scenario_id,story_id,scenario_type,scenario,expected_result,priority
+QA-001,US-001,Positive,Filter by valid SKU and location,Matching inventory records displayed,P0
+QA-002,US-001,Negative,Filter with unauthorized location,Access denied,P0
+QA-003,US-003,Edge,Missing valuation input,Value shown unavailable with quality indicator,P0
+QA-004,US-004,Negative,Inventory source becomes stale,Stale state and warning displayed,P0
+QA-005,US-006,Negative,No forecast exists,No fabricated forecast; missing-input state,P0
+QA-006,US-007,Positive,Open PO available,PO and receipt data displayed,P0
+QA-007,US-009,Positive,Projected stockout threshold crossed,Exception created or updated,P0
+QA-008,US-010,Positive,Excess threshold crossed,Excess exception created,P0
+QA-009,US-013,Edge,Equal severity exceptions,Deterministic tie-break applied,P0
+QA-010,US-014,Positive,Multiple queue filters applied,Only matching exceptions shown,P0
+QA-011,US-015,Positive,Owner assigned,Owner/due date persisted and audited,P0
+QA-012,US-016,Negative,Resolve without required reason,Resolution blocked,P0
+QA-013,US-017,Negative,Related source unavailable,Dependency marked unavailable,P0
+QA-014,US-018,Negative,Required recommendation input missing,Safe fallback/degraded state applied,P0
+QA-015,US-021,Positive,Authorized user approves,Decision and audit event recorded,P0
+QA-016,US-022,Positive,User edits recommendation,Original and edited values retained,P0
+QA-017,US-023,Negative,Reject without reason,Rejection blocked,P0
+QA-018,US-024,Positive,Auditor views decision history,Complete history visible,P0
+QA-019,US-026,Positive,Supplier issue affects inventory,Linked SKU/location exposure shown,P0
+QA-020,US-029,Positive,Duplicate record detected,Quality exception created,P0
+QA-021,US-030,Positive,Auditor opens lineage,Source-to-record lineage visible,P0
+QA-022,US-031,Negative,Critical source unavailable,Degraded state and unsafe action prevention,P0
+QA-023,US-033,Negative,Unauthorized API mutation,Server rejects request,P0
+QA-024,US-034,Positive,Material action completed,Immutable audit event created,P0
+QA-025,US-035,Positive,Action exceeds approval boundary,Approval enforced,P1
+QA-026,US-036,Positive,Leader opens KPI dashboard,KPIs and definitions displayed,P1
+QA-027,US-037,Positive,KPI selected,Underlying exceptions available,P1
+QA-028,US-038,Edge,Same source record delivered twice,Single logical record retained,P0
+QA-029,US-038,Negative,Transient ingestion failure,Retry without duplicate side effects,P0
+QA-030,US-039,Positive,Source health viewed,Freshness/failure/reconciliation shown,P0
+QA-031,US-040,Positive,Threshold version published,New evaluations use new version,P1
