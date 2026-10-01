@@ -1,0 +1,9 @@
+Experiment ID,Variant,Eligible Users,Exposed Users,Primary Metric,Result,Absolute Change,Interpretation
+EXP-001,Control,10000,9800,Booking completion rate,0.812,,Baseline
+EXP-001,Treatment,10000,9900,Booking completion rate,0.829,0.017,Synthetic improvement; requires statistical validation
+EXP-003,Control,8000,7900,Reschedule completion rate,0.542,,Baseline
+EXP-003,Treatment,8000,7850,Reschedule completion rate,0.601,0.059,Synthetic improvement; inspect guardrails
+EXP-005,Control,1200,1180,Median exception resolution hours,18.4,,Baseline
+EXP-005,Treatment,1200,1190,Median exception resolution hours,14.7,-3.7,Synthetic reduction; verify critical exceptions
+EXP-006,Control,9000,8800,Repeat booking attempt rate,0.041,,Baseline
+EXP-006,Treatment,9000,8750,Repeat booking attempt rate,0.031,-0.010,Synthetic reduction; validate duplicate-booking guardrail
