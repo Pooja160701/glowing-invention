@@ -1,0 +1,20 @@
+test_id,story_id,scenario,type,expected_result,priority
+TC-001,US-003,Import valid transaction file,Happy path,Valid records imported and summary displayed,P0
+TC-002,US-003,Import unsupported file,Validation,Import blocked with clear error,P0
+TC-003,US-003,Import duplicate transactions,Edge case,Unintended duplicates prevented,P0
+TC-004,US-004,Review failed records,Error handling,Failed records and reasons visible,P0
+TC-005,US-006,Correct transaction category,Happy path,New category persists,P0
+TC-006,US-007,View dashboard with transactions,Happy path,Financial summary displays,P0
+TC-007,US-007,View dashboard with no data,Empty state,Helpful empty state displays,P0
+TC-008,US-009,Create valid budget,Happy path,Budget created,P0
+TC-009,US-009,Create invalid budget,Validation,Invalid input rejected,P0
+TC-010,US-010,Reach budget threshold,Event,Eligible budget event generated,P0
+TC-011,US-012,Create valid savings goal,Happy path,Goal created,P0
+TC-012,US-013,Record goal contribution,Calculation,Progress updates correctly,P0
+TC-013,US-014,Generate insight with sufficient data,Happy path,Relevant insight displayed,P0
+TC-014,US-014,Generate insight with insufficient data,Guardrail,No fabricated insight displayed,P0
+TC-015,US-015,Open insight explanation,Transparency,Supporting context visible,P0
+TC-016,US-017,Disable notification category,Preference,Future notification suppressed,P1
+TC-017,US-019,Record dashboard event,Analytics,Expected event captured,P0
+TC-018,US-021,Open data controls,Privacy,Relevant controls visible,P0
+TC-019,US-022,Confirm deletion request,Privacy,Deletion request processed according to policy,P0
