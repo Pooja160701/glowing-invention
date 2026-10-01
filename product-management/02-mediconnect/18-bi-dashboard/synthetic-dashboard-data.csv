@@ -1,7 +1,0 @@
-week,search_sessions,availability_sessions,booking_submissions,successful_bookings,notification_sent,notification_delivered,exceptions_created,exceptions_resolved,ccjr,booking_success_rate,search_to_book_conversion,notification_delivery_rate,median_exception_resolution_hours
-2026-W27,12000,9300,4100,3970,7800,7640,420,390,0.884,0.968,0.331,0.979,17.8
-2026-W28,12600,9780,4250,4115,8020,7860,445,421,0.891,0.968,0.326,0.980,17.1
-2026-W29,13100,10200,4490,4360,8250,8080,438,419,0.897,0.971,0.333,0.979,16.4
-2026-W30,13750,10820,4710,4580,8510,8355,460,447,0.904,0.972,0.333,0.982,15.6
-2026-W31,14200,11250,4920,4805,8780,8630,451,439,0.909,0.977,0.338,0.983,14.9
-2026-W32,14900,11840,5160,5045,9010,8860,430,421,0.913,0.978,0.339,0.983,14.2

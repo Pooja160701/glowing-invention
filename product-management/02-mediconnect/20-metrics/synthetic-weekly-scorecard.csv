@@ -1,7 +1,0 @@
-week,ccjr,booking_success_rate,search_to_book_conversion,self_service_change_completion,notification_delivery_rate,slot_mismatch_rate,duplicate_booking_rate,core_scheduling_availability,median_exception_resolution_hours
-2026-W27,0.884,0.968,0.331,0.612,0.979,0.0042,0.0008,0.9988,17.8
-2026-W28,0.891,0.968,0.326,0.628,0.980,0.0038,0.0007,0.9990,17.1
-2026-W29,0.897,0.971,0.333,0.641,0.979,0.0034,0.0006,0.9991,16.4
-2026-W30,0.904,0.972,0.333,0.657,0.982,0.0030,0.0005,0.9992,15.6
-2026-W31,0.909,0.977,0.338,0.671,0.983,0.0027,0.0004,0.9993,14.9
-2026-W32,0.913,0.978,0.339,0.684,0.983,0.0024,0.0003,0.9994,14.2

@@ -1,8 +1,0 @@
-rule_id,domain,rule,threshold,severity,action
-DQ-001,Users,user_id must be unique,100%,Critical,Reject duplicate records
-DQ-002,Events,event_name must belong to approved taxonomy,100%,High,Quarantine invalid events
-DQ-003,Events,event_time must be present,99.9%,High,Reject or quarantine
-DQ-004,Imports,import status must be valid enum,100%,High,Reject invalid state
-DQ-005,Transactions,user_id must resolve to a known user,99.9%,Critical,Quarantine orphan record
-DQ-006,Experiments,variant must match experiment configuration,100%,High,Quarantine assignment
-DQ-007,Analytics,sensitive fields must not appear in event payloads,100%,Critical,Block ingestion

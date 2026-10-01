@@ -1,6 +1,0 @@
-research_id,type,segment,theme,insight,confidence,product_implication,status
-R-001,Interview,Early-career professional,Manual effort,Manual categorization creates friction,Medium,Automate categorization,Synthesized
-R-002,Interview,Budget-conscious professional,Budget visibility,Users want earlier awareness of spending,Medium,Show budget progress,Synthesized
-R-003,Interview,Goal-oriented saver,Goal tracking,Users want clearer goal progress,Medium,Build savings goals,Synthesized
-R-004,Interview,Multiple segments,Privacy,Financial-data handling affects trust,Medium,Provide data controls,Synthesized
-R-005,Interview,Multiple segments,Insights,Users want to understand why insights appear,Medium,Explain insight reasoning,Synthesized

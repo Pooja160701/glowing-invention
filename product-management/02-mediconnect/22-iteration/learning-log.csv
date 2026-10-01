@@ -1,8 +1,0 @@
-Learning ID,Source,Learning,Confidence,Impact,Decision,Follow-Up
-L-001,Research,Availability freshness affects user confidence,Medium,High,Test messaging,EXP-002
-L-002,Usability,Rescheduling visibility may influence self-service completion,Medium,High,Experiment,EXP-003
-L-003,Operations,Exception prioritization may improve recovery time,Medium,High,Validate workflow,EXP-005
-L-004,Analytics,Notification delivery needs operational visibility,High,High,Build tracking,Notification feature
-L-005,Security,Organization-scoped authorization is a production gate,High,Critical,Maintain strict control,Security QA
-L-006,Privacy,Analytics should minimize sensitive data collection,High,Critical,Maintain governance,Analytics QA
-L-007,Strategy,External integrations should follow canonical scheduling stabilization,Medium,High,Defer,Post-MVP roadmap
