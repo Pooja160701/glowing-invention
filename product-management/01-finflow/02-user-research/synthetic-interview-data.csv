@@ -1,0 +1,13 @@
+participant_id,segment,tracking_method,primary_pain_point,budgeting_behavior,savings_goal,trust_concern,desired_capability
+P01,Early-career professional,Spreadsheet,Manual effort,Checks weekly,Emergency fund,Data privacy,Automatic categorization
+P02,Early-career professional,Banking app,Fragmented information,Checks irregularly,Travel,Data sharing,Unified dashboard
+P03,Early-career professional,Notes app,Difficult to see trends,No formal budget,Emergency fund,Recommendation transparency,Spending insights
+P04,Early-career professional,Spreadsheet,Category maintenance,Checks weekly,Laptop purchase,Data privacy,Smart categorization
+P05,Budget-conscious professional,Spreadsheet,Too much manual entry,Checks daily,Home expenses,Data access,Automatic import
+P06,Budget-conscious professional,Banking app,Weak budget visibility,Checks weekly,Emergency fund,Notification volume,Budget alerts
+P07,Budget-conscious professional,Spreadsheet,Recurring expenses overlooked,Checks monthly,Vacation,Recommendation transparency,Recurring-expense detection
+P08,Goal-oriented saver,Spreadsheet,Goal progress unclear,Checks weekly,Education,Data privacy,Goal tracking
+P09,Goal-oriented saver,Banking app,Hard to connect spending to goals,Checks monthly,Vehicle purchase,Data sharing,Goal impact insights
+P10,Finance-management beginner,Notes app,Does not know where to start,Checks irregularly,Emergency fund,Data privacy,Guided setup
+P11,Finance-management beginner,No consistent method,Low motivation,No formal budget,Travel,Data sharing,Simple financial summary
+P12,Finance-management beginner,Spreadsheet,Too much complexity,Checks monthly,Emergency fund,Notification volume,Simple dashboard
