@@ -1,0 +1,14 @@
+KPI ID,Metric,Type,Planning Target,Owner,Cadence,Alert Level,Action
+KPI-001,CCJR,North Star,>=90%,Product,Weekly,Critical,Investigate journey failures
+KPI-002,Booking success rate,Outcome,>=98%,Product/Engineering,Daily,Critical,Investigate booking failures
+KPI-003,Search-to-book conversion,Outcome,>=30%,Product,Weekly,High,Inspect funnel drop-off
+KPI-004,Self-service change completion,Outcome,>=70%,Product,Weekly,High,Inspect cancellation/reschedule friction
+KPI-005,Notification delivery rate,Outcome,>=98%,Operations,Daily,High,Investigate provider/channel failures
+KPI-006,Slot mismatch rate,Guardrail,<0.5%,Engineering,Daily,Critical,Stop and investigate availability integrity
+KPI-007,Duplicate booking rate,Guardrail,<0.1%,Engineering,Daily,Critical,Investigate idempotency/concurrency
+KPI-008,Core scheduling availability,Guardrail,>=99.9%,Engineering,Daily,Critical,Incident response
+KPI-009,Median exception resolution time,Outcome,<12 hours,Operations,Daily,High,Review queue and staffing
+KPI-010,Critical unresolved exceptions,Guardrail,0 beyond policy threshold,Operations,Daily,Critical,Escalate immediately
+KPI-011,Authorization failure rate,Guardrail,Within approved baseline,Security,Daily,Critical,Investigate access-control anomalies
+KPI-012,Analytics privacy violations,Guardrail,0,Data/Privacy,Daily,Critical,Stop affected instrumentation
+KPI-013,Support contacts per 100 bookings,Diagnostic,Planning baseline,Operations,Weekly,Medium,Identify recurring friction
