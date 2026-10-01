@@ -1,0 +1,17 @@
+participant_id,segment,context,observation,pain_point,theme,confidence
+P001,Patient,Booking,Compared several clinics before finding a suitable slot,Availability uncertainty,Discovery,Medium
+P002,Patient,Booking,Needed multiple calls to confirm a slot,Booking coordination,Booking,Medium
+P003,Patient,Rescheduling,Was unsure how to change an appointment,Change friction,Appointment management,Medium
+P004,Patient,Reminders,Wanted a reminder but preferred control over frequency,Notification preferences,Engagement,Medium
+P005,Patient,Trust,Asked what personal information the service stores,Privacy transparency,Trust,Medium
+P006,Patient,Booking,Abandoned when available times were unclear,Unclear availability,Discovery,Medium
+P007,Patient,Reminders,Missed a reminder because it arrived through an inconvenient channel,Channel mismatch,Engagement,Medium
+P008,Patient,History,Wanted to see previous appointments in one place,Fragmented history,Continuity,Medium
+S001,Clinic Staff,Scheduling,Spent time reconciling provider availability,Schedule maintenance,Operations,Medium
+S002,Clinic Staff,Cancellation,Handled cancellations manually across channels,Manual change processing,Operations,Medium
+S003,Clinic Staff,Conflicts,Needed a clear view of scheduling conflicts,Conflict visibility,Scheduling,Medium
+S004,Clinic Staff,Reminders,Could not easily verify reminder delivery,Delivery visibility,Engagement,Medium
+S005,Clinic Staff,Patient Calls,Received repetitive calls for basic appointment changes,Administrative workload,Efficiency,Medium
+S006,Clinic Staff,Reporting,Had limited visibility into cancellation patterns,Operational insight,Analytics,Medium
+S007,Provider,Schedule,Needed confidence that availability was current,Schedule accuracy,Trust,Medium
+S008,Provider,Workflow,Wanted fewer administrative interruptions,Administrative workload,Efficiency,Medium
