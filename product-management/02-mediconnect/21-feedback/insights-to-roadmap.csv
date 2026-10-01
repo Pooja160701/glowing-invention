@@ -1,0 +1,8 @@
+Insight ID,Insight,Evidence,Confidence,Impact,Frequency,Action,Linked Area,Next Step
+INS-001,Availability confidence is a friction point,Synthetic interviews + funnel hypothesis,High,High,High,Experiment,Discovery,EXP-002
+INS-002,Rescheduling is difficult to discover,Synthetic support themes + usability hypothesis,Medium,High,Medium,Improve,Appointment management,EXP-003
+INS-003,Staff need clearer exception prioritization,Synthetic interviews + operational hypothesis,High,High,High,Build,Operations,Exception queue
+INS-004,Notification status visibility matters,Synthetic support themes,Medium,High,Medium,Build,Communications,Delivery tracking
+INS-005,Privacy explanations need more transparency,Synthetic research themes,Medium,Medium,Medium,Improve,Trust,Privacy UX review
+INS-006,Operational reporting is requested,Synthetic administrator feedback,Medium,Medium,Medium,Validate,Analytics,Dashboard discovery
+INS-007,Booking progress may reduce abandonment,Synthetic usability hypothesis,Medium,Medium,Medium,Experiment,Booking,EXP-001
