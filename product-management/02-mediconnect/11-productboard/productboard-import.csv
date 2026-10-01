@@ -1,0 +1,22 @@
+Item Type,Name,Parent,Description,Need,Priority,Status
+Need,Confidence in availability,,Patients need confidence that displayed slots are genuinely bookable,CN-001,P0,Validated hypothesis
+Need,Fast self-service booking,,Patients need to complete appointment booking without unnecessary calls,CN-002,P0,Validated hypothesis
+Need,Easy appointment changes,,Patients need simple cancellation and rescheduling,CN-003,P0,Validated hypothesis
+Need,Reliable reminders,,Patients need useful appointment communications,CN-004,P0,Validated hypothesis
+Need,Schedule control,,Clinic staff need accurate provider availability,CN-005,P0,Validated hypothesis
+Need,Exception visibility,,Clinic staff need one workflow for operational failures,CN-006,P0,Validated hypothesis
+Need,Privacy transparency,,Users need clear data and communication controls,CN-007,P0,Validated hypothesis
+Need,Operational measurement,,Teams need reliable product and operations measurement,CN-008,P0,Derived requirement
+Feature,Real-time availability,Confidence in availability,Server-authoritative bookable slots,CN-001,P0,Now
+Feature,Self-service booking,Fast self-service booking,Patient digital booking flow,CN-002,P0,Now
+Feature,Self-service rescheduling,Easy appointment changes,Patient replacement-slot workflow,CN-003,P0,Next
+Feature,Cancellation workflow,Easy appointment changes,Eligible appointment cancellation,CN-003,P0,Next
+Feature,Preference-aware reminders,Reliable reminders,Configurable reminder channels/timing,CN-004,P0,Next
+Feature,Notification delivery console,Exception visibility,Staff notification-state visibility,CN-006,P0,Next
+Feature,Staff scheduling console,Schedule control,Provider availability and appointments,CN-005,P0,Now
+Feature,Exception queue,Exception visibility,Actionable operational exceptions,CN-006,P0,Next
+Feature,Privacy center,Privacy transparency,Communication/privacy controls,CN-007,P0,Now
+Feature,RBAC and organization isolation,Privacy transparency,Role and organization-scoped access,CN-007,P0,Now
+Feature,Product analytics instrumentation,Operational measurement,Canonical product events,CN-008,P0,Now
+Feature,Advanced scheduling rules,Schedule control,Configurable complex scheduling,CN-005,P1,Later
+Feature,External scheduling integrations,Schedule control,External synchronization,CN-005,P1,Later
