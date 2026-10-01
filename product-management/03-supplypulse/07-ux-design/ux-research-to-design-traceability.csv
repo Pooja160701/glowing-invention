@@ -1,9 +1,0 @@
-research_theme,user_need,prd_requirement,story,ux_surface,validation
-Data trust,Know whether data is safe to use,FR-003;FR-024,US-004;US-031,Freshness badge;Degraded state,Usability test
-Exception overload,Focus on highest-impact work,FR-009,US-013;US-014,Priority queue;Filters,Prototype test
-Explainability,Understand why recommendation exists,FR-013;FR-015,US-019;US-020,Recommendation card,Concept test
-Human control,Approve/edit/reject material decisions,FR-014,US-021;US-022;US-023,Decision controls,Prototype test
-Supplier risk,Connect supplier events to inventory impact,FR-017,US-026;US-027,Exception detail,Workflow test
-Ownership,Know who acts next,FR-010,US-015,Owner/due-date controls,Usability test
-Auditability,Trace material decisions,FR-020,US-024;US-034,Decision history;Audit explorer,Security/QA review
-Data quality,See bad or stale data in context,FR-008;FR-024,US-029;US-030,Data Quality Center,Workflow test
