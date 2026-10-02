@@ -21,6 +21,9 @@ def summary(db: Session = Depends(get_db)):
     incidents = db.query(Incident).all()
     risks = [x.risk_score for x in findings]
     compliance = calculate_compliance(findings)
+    vulnerabilities = [x for x in findings if x.finding_type == "vulnerability"]
+    iam_risks = [x for x in findings if x.finding_type == "identity"]
+    assets = {str((x.asset or {}).get("asset_id")) for x in findings if (x.asset or {}).get("asset_id")}
 
     return {
         "findings": {
@@ -38,6 +41,9 @@ def summary(db: Session = Depends(get_db)):
             "by_severity": _distribution(alerts, "severity"),
             "by_status": _distribution(alerts, "status"),
         },
+        "assets": {"observed": len(assets), "with_findings": len(assets)},
+        "vulnerabilities": {"total": len(vulnerabilities), "critical": sum(x.severity == "critical" for x in vulnerabilities), "high": sum(x.severity == "high" for x in vulnerabilities)},
+        "iam_risks": {"total": len(iam_risks), "critical": sum(x.severity == "critical" for x in iam_risks), "high": sum(x.severity == "high" for x in iam_risks)},
         "risk": {
             "average_finding_risk": round(sum(risks) / len(risks), 2) if risks else 0.0,
             "max_finding_risk": max(risks) if risks else 0.0,
