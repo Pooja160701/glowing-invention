@@ -92,8 +92,16 @@ function App() {
           <section><p className="eyebrow">CLOUDSENTINEL</p><h1>Loading security console...</h1></section>
         ) : page === "Overview" ? (
           <Overview data={data} score={score} />
+        ) : page === "Assets" ? (
+          <Assets data={data.assets} />
         ) : page === "Findings" ? (
           <Findings rows={filteredFindings} remediations={data.remediations} />
+        ) : page === "Vulnerabilities" ? (
+          <AnalyticsList title="Vulnerabilities" data={data.vulnerabilities} />
+        ) : page === "IAM Risks" ? (
+          <AnalyticsList title="IAM risks" data={data.iamRisks} />
+        ) : page === "CloudTrail" ? (
+          <CloudTrail data={data.cloudtrail} />
         ) : page === "Alerts" ? (
           <Listing title="Alerts" rows={filteredAlerts} incident reload={load} canWrite={canWrite} />
         ) : page === "Compliance" ? (
