@@ -17,9 +17,11 @@ from app.models.finding import (
 )
 from app.schemas.alert import AlertResponse, AlertStatus, AlertStatusUpdate
 from app.services.alert_engine import AlertEngine
+from app.services.alert_notifications import AlertNotificationService
 
 router = APIRouter(prefix="/api/v1/alerts", tags=["Alerts"])
 alert_engine = AlertEngine()
+notification_service = AlertNotificationService()
 
 def _to_normalized_finding(row: Finding) -> NormalizedFinding:
     return NormalizedFinding(
@@ -159,6 +161,26 @@ def generate_alerts_for_findings(
         "findings_with_matches": matched_findings,
         "alerts_generated_or_updated": generated,
     }
+
+
+@router.post("/notify/{alert_id}")
+def notify_alert(alert_id: str, db: Session = Depends(get_db)) -> dict:
+    alert = db.query(Alert).filter(Alert.alert_id == alert_id).first()
+    if alert is None:
+        raise HTTPException(status_code=404, detail="Alert not found")
+    return {"alert_id": alert.alert_id, "results": [
+        {"channel": r.channel, "delivered": r.delivered, "detail": r.detail}
+        for r in notification_service.notify(alert)
+    ]}
+
+@router.post("/notify/open")
+def notify_open_alerts(db: Session = Depends(get_db)) -> dict:
+    alerts = db.query(Alert).filter(Alert.status.in_([AlertStatus.NEW.value, AlertStatus.ACKNOWLEDGED.value])).order_by(Alert.risk_score.desc()).all()
+    results=[]
+    for alert in alerts:
+        for r in notification_service.notify(alert):
+            results.append({"alert_id":alert.alert_id,"channel":r.channel,"delivered":r.delivered,"detail":r.detail})
+    return {"alerts_evaluated":len(alerts),"notifications_attempted":len(results),"results":results}
 
 @router.get("", response_model=list[AlertResponse])
 def list_alerts(
