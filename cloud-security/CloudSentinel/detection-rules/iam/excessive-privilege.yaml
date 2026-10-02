@@ -1,0 +1,35 @@
+rules:
+  - id: CS-IAM-001
+    name: Excessive IAM Privilege
+    description: Detects IAM findings associated with overly permissive access.
+    severity: high
+
+    finding_types:
+      - identity
+      - misconfiguration
+      - compliance
+
+    sources:
+      - iam
+      - security_hub
+
+    conditions:
+      asset_types:
+        - iam_user
+        - iam_role
+        - iam_policy
+      keywords:
+        - administratoraccess
+        - wildcard
+        - overly permissive
+        - full access
+        - unrestricted
+
+    remediation: >
+      Replace wildcard permissions with least-privilege actions and resources.
+      Review IAM policies and remove unnecessary administrative permissions.
+
+    tags:
+      - aws
+      - iam
+      - least-privilege
