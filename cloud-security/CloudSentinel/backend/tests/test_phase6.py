@@ -1,3 +1,4 @@
+from datetime import datetime, timezone
 from app.db.models import Finding
 
 def test_vulnerability_endpoint(client, db_session):
