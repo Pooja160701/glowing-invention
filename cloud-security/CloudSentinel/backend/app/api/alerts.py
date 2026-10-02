@@ -4,6 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
+from app.core.auth import require_roles
 from app.db.database import get_db
 from app.db.models import Alert, Finding
 from app.models.finding import (
@@ -115,7 +116,7 @@ def _persist_alerts(db: Session, payloads) -> list[Alert]:
     return alerts
 
 @router.post("/generate/{finding_id}", response_model=list[AlertResponse])
-def generate_alerts(finding_id: str, db: Session = Depends(get_db)) -> list[AlertResponse]:
+def generate_alerts(finding_id: str, db: Session = Depends(get_db), user: dict = Depends(require_roles("security_analyst"))) -> list[AlertResponse]:
     finding = db.query(Finding).filter(Finding.finding_id == finding_id).first()
     if finding is None:
         raise HTTPException(status_code=404, detail="Finding not found")
@@ -141,6 +142,7 @@ def generate_alerts(finding_id: str, db: Session = Depends(get_db)) -> list[Aler
 @router.post("/generate", response_model=dict)
 def generate_alerts_for_findings(
     db: Session = Depends(get_db),
+    user: dict = Depends(require_roles("security_analyst")),
 ) -> dict:
     findings = (
         db.query(Finding)
@@ -164,7 +166,7 @@ def generate_alerts_for_findings(
 
 
 @router.post("/notify/{alert_id}")
-def notify_alert(alert_id: str, db: Session = Depends(get_db)) -> dict:
+def notify_alert(alert_id: str, db: Session = Depends(get_db), user: dict = Depends(require_roles("security_analyst"))) -> dict:
     alert = db.query(Alert).filter(Alert.alert_id == alert_id).first()
     if alert is None:
         raise HTTPException(status_code=404, detail="Alert not found")
@@ -174,7 +176,7 @@ def notify_alert(alert_id: str, db: Session = Depends(get_db)) -> dict:
     ]}
 
 @router.post("/notify/open")
-def notify_open_alerts(db: Session = Depends(get_db)) -> dict:
+def notify_open_alerts(db: Session = Depends(get_db), user: dict = Depends(require_roles("security_analyst"))) -> dict:
     alerts = db.query(Alert).filter(Alert.status.in_([AlertStatus.NEW.value, AlertStatus.ACKNOWLEDGED.value])).order_by(Alert.risk_score.desc()).all()
     results=[]
     for alert in alerts:
@@ -220,6 +222,7 @@ def update_alert_status(
     alert_id: str,
     update: AlertStatusUpdate,
     db: Session = Depends(get_db),
+    user: dict = Depends(require_roles("security_analyst")),
 ) -> AlertResponse:
     alert = db.query(Alert).filter(Alert.alert_id == alert_id).first()
     if alert is None:
