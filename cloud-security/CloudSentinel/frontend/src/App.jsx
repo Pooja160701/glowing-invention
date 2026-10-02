@@ -21,11 +21,11 @@ const asItems = (value) => Array.isArray(value) ? value : (value?.items || value
 const n = (value) => new Intl.NumberFormat("en-IN").format(Number(value || 0));
 
 function App() {
-  const [data, setData] = useState({ summary: null, alerts: [], findings: [], compliance: null, remediations: [], incidents: [] });
+  const [data, setData] = useState({ summary: null, alerts: [], findings: [], compliance: null, remediations: [], incidents: [], assets: null, vulnerabilities: null, iamRisks: null, cloudtrail: null });
   const [page, setPage] = useState("Overview");
   const [query, setQuery] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);\n  const [analyticsError, setAnalyticsError] = useState("");
   const roles = keycloak.realmAccess?.roles || [];
   const canWrite = roles.includes("security_admin") || roles.includes("security_analyst");
 
@@ -66,7 +66,7 @@ function App() {
         <h2>CloudSentinel</h2>
         <small>Security Operations</small>
         <nav>
-          {["Overview", "Findings", "Alerts", "Compliance", "Incidents", "Integrations"].map(item =>
+          {["Overview", "Assets", "Findings", "Vulnerabilities", "IAM Risks", "CloudTrail", "Alerts", "Compliance", "Incidents", "Integrations"].map(item =>
             <button key={item} className={page === item ? "active" : ""} onClick={() => setPage(item)}>{item}</button>
           )}
         </nav>
@@ -157,6 +157,57 @@ function Findings({ rows, remediations }) {
         <span>{Number(x.risk_score || 0).toFixed(0)}</span>
         <span className="recommendation">{recommendations[x.finding_id] || "Review finding and apply least-privilege remediation."}</span>
       </div>)}
+    </div></div>
+  </section>;
+}
+
+
+function Assets({ data }) {
+  const rows = data?.assets || [];
+  return <section>
+    <p className="eyebrow">ASSET INVENTORY</p><h1>AWS asset inventory</h1>
+    <p className="muted">Read-only inventory discovered from AWS APIs, enriched with CloudSentinel finding evidence.</p>
+    <div className="cards">
+      <Card title="Assets" value={data?.filtered_count ?? data?.asset_count ?? 0} hint="discovered" />
+      <Card title="Region" value={data?.region || "—"} hint="AWS" />
+      <Card title="Account" value={data?.account_id || "—"} hint="AWS account" />
+    </div>
+    <div className="panel"><div className="table">
+      <div className="thead"><span>Asset</span><span>Type</span><span>Region</span><span>Findings</span></div>
+      {rows.map((x,i)=><div className="tr" key={x.asset_id+i}><span><b>{x.name}</b><small>{x.asset_id}</small></span><span>{x.asset_type}</span><span>{x.region || "global"}</span><span>{x.finding_count || 0}</span></div>)}
+      {!rows.length && <p className="muted">No AWS assets returned. Check AWS credentials and IAM read permissions.</p>}
+    </div></div>
+  </section>;
+}
+
+function AnalyticsList({ title, data }) {
+  const rows = data?.items || [];
+  return <section>
+    <p className="eyebrow">SECURITY ANALYTICS</p><h1>{title}</h1>
+    <p className="muted">Normalized security findings grouped for dashboard analysis.</p>
+    <div className="cards">
+      <Card title="Total" value={data?.total || 0} hint="findings" />
+      <Card title="Critical" value={data?.critical || 0} hint="severity" />
+      <Card title="High" value={data?.high || 0} hint="severity" />
+    </div>
+    <div className="panel"><div className="table">
+      <div className="thead"><span>Finding</span><span>Source</span><span>Severity</span><span>Risk</span></div>
+      {rows.map((x,i)=><div className="tr" key={x.finding_id+i}><span><b>{x.title}</b><small>{x.finding_id}</small></span><span>{x.source}</span><span className={"sev "+x.severity}>{x.severity}</span><span>{Number(x.risk_score || 0).toFixed(0)}</span></div>)}
+      {!rows.length && <p className="muted">No matching findings currently ingested.</p>}
+    </div></div>
+  </section>;
+}
+
+function CloudTrail({ data }) {
+  const rows = data?.events || [];
+  return <section>
+    <p className="eyebrow">AUDIT ACTIVITY</p><h1>CloudTrail activity</h1>
+    <p className="muted">Sanitized management activity from the last {data?.hours || 24} hours.</p>
+    <div className="cards"><Card title="Events" value={data?.events_received || 0} hint="last 24h" /><Card title="Connected" value={data?.connected ? "Yes" : "No"} hint="CloudTrail" /></div>
+    <div className="panel"><div className="table">
+      <div className="thead"><span>Event</span><span>Identity</span><span>Source</span><span>Time</span></div>
+      {rows.map((x,i)=><div className="tr" key={x.event_id+i}><span><b>{x.event_name || "—"}</b><small>{x.event_id || ""}</small></span><span>{x.username || x.role_name || x.identity_type || "—"}</span><span>{x.event_source || "—"}</span><span>{x.event_time ? new Date(x.event_time).toLocaleString() : "—"}</span></div>)}
+      {!rows.length && <p className="muted">{data ? "No CloudTrail events found in the selected window." : "CloudTrail data unavailable. Check AWS permissions."}</p>}
     </div></div>
   </section>;
 }
