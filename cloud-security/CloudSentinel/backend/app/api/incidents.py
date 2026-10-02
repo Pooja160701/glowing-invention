@@ -4,6 +4,7 @@ from uuid import uuid4
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
+from app.core.auth import require_roles
 from app.db.database import get_db
 from app.db.models import Alert, Incident, IncidentEvent
 from app.schemas.incident import (
@@ -75,7 +76,7 @@ def _add_event(db: Session, incident_id: str, event_type: str, note: str, actor:
     return event
 
 @router.post("", response_model=IncidentResponse)
-def create_incident(payload: IncidentCreate, db: Session = Depends(get_db)):
+def create_incident(payload: IncidentCreate, db: Session = Depends(get_db), user: dict = Depends(require_roles("security_analyst"))):
     incident = Incident(
         incident_id=f"INC-{uuid4().hex[:12].upper()}",
         title=payload.title,
@@ -95,7 +96,7 @@ def create_incident(payload: IncidentCreate, db: Session = Depends(get_db)):
     return _response(db, incident)
 
 @router.post("/from-alert/{alert_id}", response_model=IncidentResponse)
-def create_incident_from_alert(alert_id: str, db: Session = Depends(get_db)):
+def create_incident_from_alert(alert_id: str, db: Session = Depends(get_db), user: dict = Depends(require_roles("security_analyst"))):
     alert = db.query(Alert).filter(Alert.alert_id == alert_id).first()
     if alert is None:
         raise HTTPException(status_code=404, detail="Alert not found")
@@ -171,6 +172,7 @@ def update_incident_status(
     incident_id: str,
     payload: IncidentStatusUpdate,
     db: Session = Depends(get_db),
+    user: dict = Depends(require_roles("security_analyst")),
 ):
     incident = db.query(Incident).filter(Incident.incident_id == incident_id).first()
     if incident is None:
@@ -218,6 +220,7 @@ def add_incident_event(
     incident_id: str,
     payload: IncidentEventCreate,
     db: Session = Depends(get_db),
+    user: dict = Depends(require_roles("security_analyst")),
 ):
     incident = db.query(Incident).filter(Incident.incident_id == incident_id).first()
     if incident is None:
