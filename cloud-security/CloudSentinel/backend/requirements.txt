@@ -5,3 +5,5 @@ pydantic-settings
 boto3
 pytest
 httpx
+sqlalchemy
+psycopg2-binary
