@@ -1,8 +1,10 @@
 from datetime import datetime
-from sqlalchemy import DateTime, Float, String, Text, UniqueConstraint
+from sqlalchemy import DateTime, Float, JSON, String, Text, UniqueConstraint
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column
 from app.db.database import Base
+
+JSONB_COMPAT = JSONB().with_variant(JSON(), "sqlite")
 
 class Finding(Base):
     __tablename__ = "findings"
@@ -15,7 +17,7 @@ class Finding(Base):
     description: Mapped[str] = mapped_column(Text, nullable=False)
     severity: Mapped[str] = mapped_column(String(30), nullable=False, index=True)
     status: Mapped[str] = mapped_column(String(30), nullable=False, default="new", index=True)
-    asset: Mapped[dict] = mapped_column(JSONB, nullable=False)
+    asset: Mapped[dict] = mapped_column(JSONB_COMPAT, nullable=False)
     severity_score: Mapped[float] = mapped_column(Float, nullable=False)
     asset_criticality: Mapped[float] = mapped_column(Float, nullable=False)
     exploitability: Mapped[float] = mapped_column(Float, nullable=False)
