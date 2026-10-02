@@ -1,12 +1,15 @@
 from datetime import datetime
 from enum import Enum
+
 from pydantic import BaseModel, Field
+
 
 class AlertStatus(str, Enum):
     NEW = "new"
     ACKNOWLEDGED = "acknowledged"
     RESOLVED = "resolved"
     SUPPRESSED = "suppressed"
+
 
 class AlertResponse(BaseModel):
     alert_id: str
@@ -28,6 +31,7 @@ class AlertResponse(BaseModel):
     updated_at: datetime
     acknowledged_at: datetime | None = None
     resolved_at: datetime | None = None
+
 
 class AlertStatusUpdate(BaseModel):
     status: AlertStatus
