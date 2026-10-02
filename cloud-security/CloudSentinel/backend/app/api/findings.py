@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 from app.db.database import get_db
 from app.db.models import Finding
@@ -49,11 +49,40 @@ def create_finding(
 
 @router.get("")
 def list_findings(
+    source: str | None = Query(default=None),
+    severity: str | None = Query(default=None),
+    status: str | None = Query(default=None),
+    finding_type: str | None = Query(default=None),
+    min_risk_score: float | None = Query(
+        default=None,
+        ge=0,
+        le=100,
+    ),
     db: Session = Depends(get_db),
 ) -> list[dict]:
+
+    query = db.query(Finding)
+
+    if source:
+        query = query.filter(Finding.source == source)
+
+    if severity:
+        query = query.filter(Finding.severity == severity)
+
+    if status:
+        query = query.filter(Finding.status == status)
+
+    if finding_type:
+        query = query.filter(Finding.finding_type == finding_type)
+
+    if min_risk_score is not None:
+        query = query.filter(
+            Finding.risk_score >= min_risk_score
+        )
+
     findings = (
-        db.query(Finding)
-        .order_by(Finding.created_at.desc())
+        query
+        .order_by(Finding.risk_score.desc())
         .all()
     )
 
