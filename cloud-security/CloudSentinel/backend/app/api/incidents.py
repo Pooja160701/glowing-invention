@@ -145,6 +145,20 @@ def list_incidents(
     incidents = query.order_by(Incident.updated_at.desc()).all()
     return [_response(db, incident) for incident in incidents]
 
+@router.get("/stats/summary")
+def incident_stats(db: Session = Depends(get_db)):
+    incidents = db.query(Incident).all()
+    return {
+        "total": len(incidents),
+        "open": sum(i.status in {"open", "investigating", "contained"} for i in incidents),
+        "resolved": sum(i.status == "resolved" for i in incidents),
+        "closed": sum(i.status == "closed" for i in incidents),
+        "by_status": {
+            status: sum(i.status == status for i in incidents)
+            for status in ["open", "investigating", "contained", "resolved", "closed"]
+        },
+    }
+
 @router.get("/{incident_id}", response_model=IncidentResponse)
 def get_incident(incident_id: str, db: Session = Depends(get_db)):
     incident = db.query(Incident).filter(Incident.incident_id == incident_id).first()
