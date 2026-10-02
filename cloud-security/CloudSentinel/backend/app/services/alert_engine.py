@@ -44,7 +44,10 @@ class AlertEngine:
     """Convert detection-rule matches into actionable security alerts."""
 
     def __init__(self, rules_directory: str | Path | None = None):
-        self.rules_directory = Path(rules_directory or Path(__file__).resolve().parents[2] / "detection-rules")
+        self.rules_directory = Path(
+            rules_directory
+            or Path(__file__).resolve().parents[3] / "detection-rules"
+        )
         self.detection_engine = DetectionEngine(self.rules_directory)
 
     def build_alert(self, finding: NormalizedFinding, rule: DetectionRule) -> AlertPayload:
