@@ -13,8 +13,9 @@ locals {
 module "iam" {
   source = "./modules/iam"
 
-  project_name = var.project_name
-  environment  = var.environment
+  project_name         = var.project_name
+  environment          = var.environment
+  security_kms_key_arn = module.kms.security_key_arn
 }
 
 module "kms" {
@@ -79,4 +80,13 @@ module "macie" {
   project_name = var.project_name
   environment  = var.environment
   aws_region   = var.aws_region
+}
+
+module "secrets_manager" {
+  source = "./modules/secrets-manager"
+
+  project_name = var.project_name
+  environment  = var.environment
+  aws_region   = var.aws_region
+  kms_key_arn  = module.kms.security_key_arn
 }

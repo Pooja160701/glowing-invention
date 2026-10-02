@@ -8,13 +8,12 @@ variable "environment" {
   type        = string
 }
 
-variable "security_log_bucket_arn" {
-  description = "ARN of the security logging bucket"
+variable "kms_key_arn" {
+  description = "KMS key used to encrypt Secrets Manager secrets"
   type        = string
-  default     = ""
 }
 
-variable "security_kms_key_arn" {
-  description = "KMS key ARN used to encrypt CloudSentinel application secrets"
+variable "aws_region" {
+  description = "AWS region"
   type        = string
 }

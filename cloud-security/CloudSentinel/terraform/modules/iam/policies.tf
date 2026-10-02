@@ -113,7 +113,7 @@ data "aws_iam_policy_document" "application_workload" {
     ]
 
     resources = [
-      "arn:aws:kms:*:*:key/*"
+      var.security_kms_key_arn
     ]
 
     condition {

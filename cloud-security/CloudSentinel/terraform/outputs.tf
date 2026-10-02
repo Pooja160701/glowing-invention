@@ -112,3 +112,18 @@ output "macie_finding_publishing_frequency" {
   description = "Amazon Macie finding publishing frequency"
   value       = module.macie.macie_finding_publishing_frequency
 }
+
+output "application_secret_arn" {
+  description = "CloudSentinel application secret ARN"
+  value       = module.secrets_manager.application_secret_arn
+}
+
+output "application_secret_name" {
+  description = "CloudSentinel application secret name"
+  value       = module.secrets_manager.application_secret_name
+}
+
+output "application_secret_kms_key_id" {
+  description = "KMS key used by the application secret"
+  value       = module.secrets_manager.application_secret_kms_key_id
+}
