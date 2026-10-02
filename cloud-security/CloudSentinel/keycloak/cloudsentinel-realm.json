@@ -1,0 +1,33 @@
+{
+  "realm": "cloudsentinel",
+  "enabled": true,
+  "displayName": "CloudSentinel",
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "roles": {
+    "realm": [
+      {"name": "security_admin", "description": "Full CloudSentinel security administration"},
+      {"name": "security_analyst", "description": "Security operations and response analyst"},
+      {"name": "auditor", "description": "Read-only security auditor"},
+      {"name": "developer", "description": "Read-only developer access"}
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "cloudsentinel-frontend",
+      "name": "CloudSentinel Frontend",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "redirectUris": ["http://localhost:5173/*"],
+      "webOrigins": ["http://localhost:5173"],
+      "attributes": {
+        "pkce.code.challenge.method": "S256"
+      },
+      "defaultClientScopes": ["openid", "profile", "email", "roles", "web-origins"]
+    }
+  ]
+}
