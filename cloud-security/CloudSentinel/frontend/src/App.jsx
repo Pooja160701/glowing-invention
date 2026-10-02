@@ -81,7 +81,7 @@ function App() {
         ) : page === "Findings" ? (
           <Findings rows={filteredFindings} remediations={data.remediations} />
         ) : page === "Alerts" ? (
-          <Listing title="Alerts" rows={filteredAlerts} />
+          <Listing title="Alerts" rows={filteredAlerts} incident reload={load} />
         ) : page === "Compliance" ? (
           <Compliance data={data.compliance} />
         ) : page === "Incidents" ? (
@@ -218,7 +218,27 @@ function Table({rows}) {
     {rows.map((x,i)=><div className="tr" key={x.finding_id||x.alert_id||i}><span><b>{x.title||x.rule_name||"Untitled"}</b><small>{x.finding_id||x.alert_id}</small></span><span>{x.source||"—"}</span><span className={"sev " + (x.severity||"low")}>{x.severity||"—"}</span><span>{Number(x.risk_score||0).toFixed(0)}</span></div>)}
   </div>;
 }
-function Listing({title,rows}) { return <section><p className="eyebrow">RESPONSE CENTER</p><h1>{title}</h1><p className="muted">Search and review CloudSentinel records.</p><div className="panel"><Table rows={rows}/></div></section>; }
+function Listing({title,rows,incident,reload}) {
+  const createIncident = async (alert) => {
+    try {
+      await api("/api/v1/incidents/from-alert/" + alert.alert_id, {method:"POST"});
+      await reload();
+      window.alert("Incident created from " + alert.alert_id);
+    } catch (e) { window.alert(e.message); }
+  };
+  return <section>
+    <p className="eyebrow">RESPONSE CENTER</p><h1>{title}</h1>
+    <p className="muted">{incident ? "Convert high-priority alerts into tracked incidents." : "Search and review CloudSentinel records."}</p>
+    <div className="panel">
+      {incident && rows.length > 0 ? rows.map((x,i)=><div className="tr" key={x.alert_id||i} style={{gridTemplateColumns:"2fr 1fr .8fr .6fr 1fr"}}>
+        <span><b>{x.title||x.rule_name}</b><small>{x.alert_id}</small></span>
+        <span>{x.source||"—"}</span><span className={"sev "+(x.severity||"low")}>{x.severity||"—"}</span>
+        <span>{Number(x.risk_score||0).toFixed(0)}</span>
+        <button onClick={() => createIncident(x)}>Create incident</button>
+      </div>) : <Table rows={rows}/>}
+    </div>
+  </section>;
+}
 function Integrations() {
   const aws=["GuardDuty","Security Hub","Inspector","Macie","AWS Config","CloudTrail","IAM"];
   return <section><p className="eyebrow">CONNECTIVITY</p><h1>Integrations</h1><p className="muted">AWS service coverage and normalized finding intake.</p>
