@@ -13,6 +13,8 @@ from app.api.dashboard import router as dashboard_router
 from app.api.compliance import router as compliance_router
 from app.api.remediation import router as remediation_router
 from app.api.incidents import router as incidents_router
+from app.api.inventory import router as inventory_router
+from app.api.dashboard_data import router as dashboard_data_router
 from app.db.database import Base, engine
 from app.db import models as db_models
 
@@ -41,6 +43,8 @@ app.include_router(dashboard_router)
 app.include_router(compliance_router)
 app.include_router(remediation_router)
 app.include_router(incidents_router)
+app.include_router(inventory_router)
+app.include_router(dashboard_data_router)
 
 
 @app.get("/health")
