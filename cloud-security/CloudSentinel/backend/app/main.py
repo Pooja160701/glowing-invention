@@ -8,6 +8,7 @@ from app.api.guardduty import router as guardduty_router
 from app.api.cloudtrail import router as cloudtrail_router
 from app.api.detections import router as detections_router
 from app.api.alerts import router as alerts_router
+from app.api.dashboard import router as dashboard_router
 from app.db.database import Base, engine
 from app.db import models as db_models
 
@@ -31,6 +32,7 @@ app.include_router(guardduty_router)
 app.include_router(cloudtrail_router)
 app.include_router(detections_router)
 app.include_router(alerts_router)
+app.include_router(dashboard_router)
 
 
 @app.get("/health")
