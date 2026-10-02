@@ -116,12 +116,70 @@ def _extract_asset(
     finding: dict,
 ) -> FindingAsset:
     """
-    Extract the primary resource from a Security Hub finding.
+    Extract the resource actually affected by the finding.
+
+    Security Hub findings can contain several resources. The first resource
+    is not necessarily the affected resource (for example, a GuardDuty S3
+    finding may include an EC2 instance, IAM access key, and several S3
+    buckets). Prefer the resource referenced by GuardDuty's affected-resource
+    metadata and then fall back to a resource type suggested by the finding.
     """
 
     resources = finding.get("Resources") or []
-
     resource = resources[0] if resources else {}
+
+    def _resource_type_matches(resource_item: dict, wanted: str) -> bool:
+        return str(resource_item.get("Type") or "").lower() == wanted.lower()
+
+    affected_type = (
+        ((finding.get("Action") or {}).get("AwsApiCallAction") or {})
+        .get("AffectedResources") or {}
+    )
+    affected_keys = {str(key).lower() for key in affected_type}
+
+    preferred_type = None
+    if any("s3" in key and "bucket" in key for key in affected_keys):
+        preferred_type = "AwsS3Bucket"
+    elif any("securitygroup" in key for key in affected_keys):
+        preferred_type = "AwsEc2SecurityGroup"
+    elif any("lambda" in key for key in affected_keys):
+        preferred_type = "AwsLambdaFunction"
+    elif any("ecr" in key for key in affected_keys):
+        preferred_type = "AwsEcrContainerImage"
+
+    if preferred_type:
+        resource = next(
+            (item for item in resources if _resource_type_matches(item, preferred_type)),
+            resource,
+        )
+    else:
+        finding_text = " ".join(
+            str(value or "")
+            for value in (
+                finding.get("Title"),
+                finding.get("Description"),
+                finding.get("Types"),
+            )
+        ).lower()
+        text_preferences = [
+            ("s3", "AwsS3Bucket"),
+            ("bucket", "AwsS3Bucket"),
+            ("iam", "AwsIamUser"),
+            ("access key", "AwsIamAccessKey"),
+            ("lambda", "AwsLambdaFunction"),
+            ("ecr", "AwsEcrContainerImage"),
+            ("security group", "AwsEc2SecurityGroup"),
+            ("ec2", "AwsEc2Instance"),
+        ]
+        for keyword, candidate_type in text_preferences:
+            if keyword in finding_text:
+                candidate = next(
+                    (item for item in resources if _resource_type_matches(item, candidate_type)),
+                    None,
+                )
+                if candidate:
+                    resource = candidate
+                    break
 
     resource_type = resource.get(
         "Type",
@@ -173,6 +231,64 @@ def _extract_asset(
         ),
         asset_name=str(asset_id),
     )
+
+def _infer_finding_type(
+    finding: dict,
+) -> FindingType:
+    """Infer a useful CloudSentinel finding category from Security Hub data."""
+
+    text = " ".join(
+        str(value or "")
+        for value in (
+            finding.get("Title"),
+            finding.get("Description"),
+            finding.get("Types"),
+            ((finding.get("Action") or {}).get("AwsApiCallAction") or {}).get(
+                "AffectedResources"
+            ),
+        )
+    ).lower()
+
+    if any(term in text for term in (
+        "public anonymous access",
+        "public access",
+        "bucketanonymousaccess",
+        "unrestricted",
+        "0.0.0.0/0",
+        "unencrypted",
+        "encryption disabled",
+        "overly permissive",
+        "misconfiguration",
+    )):
+        return FindingType.MISCONFIGURATION
+
+    if any(term in text for term in (
+        "vulnerability",
+        "cve-",
+        "package vulnerability",
+        "container vulnerability",
+    )):
+        return FindingType.VULNERABILITY
+
+    if any(term in text for term in (
+        "credential compromise",
+        "suspicious",
+        "tor exit node",
+        "malicious",
+        "threat",
+    )):
+        return FindingType.THREAT
+
+    if any(term in text for term in (
+        "iam",
+        "access key",
+        "privilege",
+        "permission",
+    )):
+        return FindingType.IDENTITY
+
+    return FindingType.COMPLIANCE
+
 
 def _parse_timestamp(
     value: Any,
@@ -270,7 +386,7 @@ def _build_finding_create(
     return FindingCreate(
         source_finding_id=finding_id,
         source="security_hub",
-        finding_type=FindingType.COMPLIANCE,
+        finding_type=_infer_finding_type(raw_finding),
         title=title,
         description=description,
         severity=severity,
@@ -336,17 +452,33 @@ def ingest_securityhub_findings(
             .first()
         )
 
-        if existing:
-            existing.last_seen = datetime.now(
-                timezone.utc
-            )
-
-            findings_skipped += 1
-            continue
-
         finding_create = _build_finding_create(
             raw_finding
         )
+
+        if existing:
+            # Refresh normalization for findings already stored by an older
+            # version of the ingestion logic. This is important when the
+            # source contains multiple resources and the affected resource
+            # was previously inferred incorrectly.
+            normalized = normalize_finding(finding_create)
+            existing.finding_type = normalized.finding_type.value
+            existing.title = normalized.title
+            existing.description = normalized.description
+            existing.severity = normalized.severity.value
+            existing.asset = normalized.asset.model_dump(mode="json")
+            existing.severity_score = normalized.risk.severity_score
+            existing.asset_criticality = normalized.risk.asset_criticality
+            existing.exploitability = normalized.risk.exploitability
+            existing.exposure = normalized.risk.exposure
+            existing.data_sensitivity = normalized.risk.data_sensitivity
+            existing.risk_score = normalized.risk.risk_score
+            existing.remediation = normalized.remediation
+            existing.last_seen = normalized.last_seen
+            existing.tags = normalized.tags
+            existing.metadata_json = _json_safe(normalized.metadata)
+            findings_skipped += 1
+            continue
 
         normalized = normalize_finding(
             finding_create
