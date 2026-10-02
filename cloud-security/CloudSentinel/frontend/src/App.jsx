@@ -25,22 +25,26 @@ function App() {
   const [page, setPage] = useState("Overview");
   const [query, setQuery] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(true);\n  const [analyticsError, setAnalyticsError] = useState("");
+  const [loading, setLoading] = useState(true);
   const roles = keycloak.realmAccess?.roles || [];
   const canWrite = roles.includes("security_admin") || roles.includes("security_analyst");
 
   const load = async () => {
     setLoading(true);
     try {
-      const [summary, alerts, findings, compliance, remediations, incidents] = await Promise.all([
+      const [summary, alerts, findings, compliance, remediations, incidents, assets, vulnerabilities, iamRisks, cloudtrail] = await Promise.all([
         api("/api/v1/dashboard/summary"),
         api("/api/v1/alerts"),
         api("/api/v1/findings"),
         api("/api/v1/compliance/summary"),
         api("/api/v1/remediation/open"),
         api("/api/v1/incidents"),
+        api("/api/v1/inventory/assets").catch(() => null),
+        api("/api/v1/dashboard-data/vulnerabilities").catch(() => null),
+        api("/api/v1/dashboard-data/iam-risks").catch(() => null),
+        api("/api/v1/cloudtrail/events?hours=24&max_results=50").catch(() => null),
       ]);
-      setData({ summary, alerts: asItems(alerts), findings: asItems(findings), compliance, remediations: asItems(remediations), incidents: asItems(incidents) });
+      setData({ summary, alerts: asItems(alerts), findings: asItems(findings), compliance, remediations: asItems(remediations), incidents: asItems(incidents), assets, vulnerabilities, iamRisks, cloudtrail });
       setError("");
     } catch (err) {
       console.error(err);
