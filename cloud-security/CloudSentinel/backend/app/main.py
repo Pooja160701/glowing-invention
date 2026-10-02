@@ -2,6 +2,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
+from app.api.auth import router as auth_router
 from app.api.findings import router as findings_router
 from app.api.security import router as security_router
 from app.api.guardduty import router as guardduty_router
@@ -25,10 +26,11 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title="CloudSentinel API",
     description="AWS Cloud Security Posture and Threat Detection Platform",
-    version="0.4.0",
+    version="0.5.0",
     lifespan=lifespan,
 )
 
+app.include_router(auth_router)
 app.include_router(findings_router)
 app.include_router(security_router)
 app.include_router(guardduty_router)
@@ -46,5 +48,5 @@ def health_check() -> dict[str, str]:
     return {
         "status": "healthy",
         "service": "cloudsentinel-api",
-        "version": "0.4.0",
+        "version": "0.5.0",
     }
