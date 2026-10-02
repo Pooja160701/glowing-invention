@@ -79,3 +79,10 @@ def test_alert_tags_are_deduplicated():
     alert = alert_engine.build_alert(finding, rule)
     assert alert.tags.count("test") == 1
     assert len(alert.tags) == len(set(alert.tags))
+
+
+def test_alert_engine_default_rules_directory_loads_rules():
+    alert_engine = AlertEngine()
+    rule_ids = {rule.rule_id for rule in alert_engine.detection_engine.list_rules()}
+    assert "CS-S3-001" in rule_ids
+    assert len(rule_ids) >= 6
