@@ -7,8 +7,8 @@ def test_vulnerability_endpoint(client, db_session):
         finding_type="vulnerability", title="Critical package CVE", description="CVE",
         severity="critical", status="new", asset={"asset_id":"i-1","asset_type":"ec2"},
         severity_score=10, asset_criticality=8, exploitability=9, exposure=7,
-        data_sensitivity=5, risk_score=90, remediation="Patch", first_seen="2026-01-01",
-        last_seen="2026-01-01", tags=[], metadata_json={}
+        data_sensitivity=5, risk_score=90, remediation="Patch", first_seen=datetime.now(timezone.utc),
+        last_seen=datetime.now(timezone.utc), tags=[], metadata_json={}
     ))
     db_session.commit()
     r=client.get("/api/v1/dashboard-data/vulnerabilities")
