@@ -31,7 +31,7 @@ def _to_normalized_finding(row: Finding) -> NormalizedFinding:
         description=row.description,
         severity=FindingSeverity(row.severity),
         status=FindingStatus(row.status),
-        asset=FindingAsset.model_validate(row.asset),
+        asset=FindingAsset.model_validate({**row.asset, "asset_name": row.asset.get("asset_name") or row.asset.get("name")}),
         risk=FindingRisk(
             severity_score=row.severity_score,
             asset_criticality=row.asset_criticality,
