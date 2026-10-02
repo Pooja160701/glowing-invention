@@ -12,7 +12,7 @@ footer{position:absolute;bottom:25px;color:#54d891;font-size:10px}
 .main,main{margin-left:230px;width:calc(100% - 230px)}
 header{height:68px;border-bottom:1px solid #17283b;display:flex;align-items:center;padding:0 30px;gap:15px;color:#6f8498;position:sticky;top:0;background:#091625;z-index:2}
 header input{margin-left:auto;width:240px;background:#0d1c2d;border:1px solid #1a3047;color:white;border-radius:7px;padding:9px}
-header button,.incident-actions button{background:#0d1c2d;border:1px solid #1a3047;color:#9bb0c4;border-radius:7px;padding:8px;cursor:pointer}
+.identity{font-size:10px;color:#78a1c5;white-space:nowrap}header button,.incident-actions button{background:#0d1c2d;border:1px solid #1a3047;color:#9bb0c4;border-radius:7px;padding:8px;cursor:pointer}
 .page,section{padding:30px;max-width:1500px;margin:auto}
 .eyebrow{font-size:10px;letter-spacing:.15em;color:#4da3ff;font-weight:bold}
 h1{font-size:26px}
