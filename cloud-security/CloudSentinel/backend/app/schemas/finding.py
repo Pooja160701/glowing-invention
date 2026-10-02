@@ -41,3 +41,6 @@ class FindingCreate(BaseModel):
 
 class FindingResponse(NormalizedFinding):
     pass
+
+class FindingStatusUpdate(BaseModel):
+    status: str

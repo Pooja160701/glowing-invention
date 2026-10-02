@@ -1,9 +1,12 @@
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, Query, HTTPException
 from sqlalchemy.orm import Session
 from app.db.database import get_db
 from app.db.models import Finding
 from app.models.finding import NormalizedFinding
-from app.schemas.finding import FindingCreate
+from app.schemas.finding import (
+    FindingCreate,
+    FindingStatusUpdate,
+)
 from app.services.finding_normalizer import normalize_finding
 
 router = APIRouter(
@@ -99,3 +102,94 @@ def list_findings(
         }
         for finding in findings
     ]
+
+@router.get("/{finding_id}")
+def get_finding(
+    finding_id: str,
+    db: Session = Depends(get_db),
+) -> dict:
+    finding = (
+        db.query(Finding)
+        .filter(Finding.finding_id == finding_id)
+        .first()
+    )
+
+    if finding is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Finding not found",
+        )
+
+    return {
+        "finding_id": finding.finding_id,
+        "source_finding_id": finding.source_finding_id,
+        "source": finding.source,
+        "finding_type": finding.finding_type,
+        "title": finding.title,
+        "description": finding.description,
+        "severity": finding.severity,
+        "status": finding.status,
+        "asset": finding.asset,
+        "risk": {
+            "severity_score": finding.severity_score,
+            "asset_criticality": finding.asset_criticality,
+            "exploitability": finding.exploitability,
+            "exposure": finding.exposure,
+            "data_sensitivity": finding.data_sensitivity,
+            "risk_score": finding.risk_score,
+        },
+        "remediation": finding.remediation,
+        "first_seen": finding.first_seen,
+        "last_seen": finding.last_seen,
+        "tags": finding.tags,
+        "metadata": finding.metadata_json,
+        "created_at": finding.created_at,
+        "updated_at": finding.updated_at,
+    }
+
+
+@router.patch("/{finding_id}/status")
+def update_finding_status(
+    finding_id: str,
+    update: FindingStatusUpdate,
+    db: Session = Depends(get_db),
+) -> dict:
+    allowed_statuses = {
+        "new",
+        "open",
+        "acknowledged",
+        "resolved",
+        "suppressed",
+    }
+
+    if update.status not in allowed_statuses:
+        raise HTTPException(
+            status_code=400,
+            detail=(
+                f"Invalid status. Allowed values: "
+                f"{sorted(allowed_statuses)}"
+            ),
+        )
+
+    finding = (
+        db.query(Finding)
+        .filter(Finding.finding_id == finding_id)
+        .first()
+    )
+
+    if finding is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Finding not found",
+        )
+
+    finding.status = update.status
+
+    db.commit()
+    db.refresh(finding)
+
+    return {
+        "finding_id": finding.finding_id,
+        "status": finding.status,
+        "updated_at": finding.updated_at,
+    }
