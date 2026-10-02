@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 from app.db.database import get_db
 from app.db.models import Finding
+from app.services.iam_risk import analyze_iam_risks
 
 router = APIRouter(prefix="/api/v1/dashboard-data", tags=["Dashboard Analytics"])
 
@@ -24,6 +25,29 @@ def iam_risks(
     min_risk_score: float | None = Query(None, ge=0, le=100),
     db: Session = Depends(get_db),
 ):
-    rows = db.query(Finding).filter(Finding.finding_type == "identity").order_by(Finding.risk_score.desc()).all()
-    if min_risk_score is not None: rows = [x for x in rows if x.risk_score >= min_risk_score]
-    return {"total": len(rows), "critical": sum(x.severity == "critical" for x in rows), "high": sum(x.severity == "high" for x in rows), "items": [{"finding_id":x.finding_id,"title":x.title,"severity":x.severity,"risk_score":x.risk_score,"source":x.source,"asset":x.asset,"status":x.status,"remediation":x.remediation} for x in rows]}
+    persisted = db.query(Finding).filter(Finding.finding_type == "identity").order_by(Finding.risk_score.desc()).all()
+    items = [{
+        "finding_id": x.finding_id, "title": x.title, "severity": x.severity,
+        "risk_score": x.risk_score, "source": x.source, "asset": x.asset,
+        "status": x.status, "remediation": x.remediation
+    } for x in persisted]
+    try:
+        live = analyze_iam_risks()
+        items.extend(live["items"])
+        connected = live["connected"]
+        roles_checked = live["roles_checked"]
+    except Exception:
+        connected = False
+        roles_checked = 0
+    if min_risk_score is not None:
+        items = [x for x in items if x["risk_score"] >= min_risk_score]
+    items.sort(key=lambda x: x["risk_score"], reverse=True)
+    return {
+        "service": "iam",
+        "connected": connected,
+        "roles_checked": roles_checked,
+        "total": len(items),
+        "critical": sum(x["severity"] == "critical" for x in items),
+        "high": sum(x["severity"] == "high" for x in items),
+        "items": items,
+    }
