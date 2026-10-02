@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from app.api.findings import router as findings_router
+from app.api.security import router as security_router
 
 app = FastAPI(
     title="CloudSentinel API",
@@ -8,6 +9,7 @@ app = FastAPI(
 )
 
 app.include_router(findings_router)
+app.include_router(security_router)
 
 @app.get("/health")
 def health_check() -> dict[str, str]:
