@@ -1,8 +1,14 @@
+import keycloak from "./auth/keycloak";
 import React, { useEffect, useMemo, useState } from "react";
 
 const api = async (path, options = {}) => {
+  await keycloak.updateToken(30);
   const response = await fetch(path, {
-    headers: { "Content-Type": "application/json", ...(options.headers || {}) },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + keycloak.token,
+      ...(options.headers || {}),
+    },
     ...options,
   });
   const text = await response.text();
@@ -20,6 +26,8 @@ function App() {
   const [query, setQuery] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+  const roles = keycloak.realmAccess?.roles || [];
+  const canWrite = roles.includes("security_admin") || roles.includes("security_analyst");
 
   const load = async () => {
     setLoading(true);
@@ -69,7 +77,9 @@ function App() {
         <header>
           <div>Cloud Security / <b>{page}</b></div>
           <input value={query} onChange={e => setQuery(e.target.value)} placeholder="Search..." />
+          <span className="identity">{keycloak.tokenParsed?.preferred_username || "user"} · {roles[0] || "authenticated"}</span>
           <button onClick={load} title="Refresh">↻</button>
+          <button onClick={() => keycloak.logout({ redirectUri: window.location.origin })} title="Sign out">Sign out</button>
         </header>
 
         {error && <div className="error"><strong>Backend error</strong><div>{error}</div></div>}
@@ -81,11 +91,11 @@ function App() {
         ) : page === "Findings" ? (
           <Findings rows={filteredFindings} remediations={data.remediations} />
         ) : page === "Alerts" ? (
-          <Listing title="Alerts" rows={filteredAlerts} incident reload={load} />
+          <Listing title="Alerts" rows={filteredAlerts} incident reload={load} canWrite={canWrite} />
         ) : page === "Compliance" ? (
           <Compliance data={data.compliance} />
         ) : page === "Incidents" ? (
-          <Incidents rows={filteredIncidents} reload={load} />
+          <Incidents rows={filteredIncidents} reload={load} canWrite={canWrite} />
         ) : (
           <Integrations />
         )}
@@ -173,7 +183,7 @@ function Compliance({ data }) {
   </section>;
 }
 
-function Incidents({ rows, reload }) {
+function Incidents({ rows, reload, canWrite }) {
   const advance = async (incident, target) => {
     try {
       await api("/api/v1/incidents/" + incident.incident_id + "/status", {
@@ -194,12 +204,12 @@ function Incidents({ rows, reload }) {
         <div className="lifecycle">{["open","investigating","contained","resolved","closed"].map(s =>
           <span className={i.status === s ? "current" : ""} key={s}>{s}</span>
         )}</div>
-        <div className="incident-actions">
+        {canWrite && <div className="incident-actions">
           {i.status === "open" && <button onClick={() => advance(i,"investigating")}>Start investigation</button>}
           {i.status === "investigating" && <button onClick={() => advance(i,"contained")}>Mark contained</button>}
           {i.status === "contained" && <button onClick={() => advance(i,"resolved")}>Resolve</button>}
           {i.status === "resolved" && <button onClick={() => advance(i,"closed")}>Close incident</button>}
-        </div>
+        </div>}
         <small className="muted">Timeline events: {i.events?.length || 0}</small>
       </div>)}
   </section>;
@@ -218,7 +228,7 @@ function Table({rows}) {
     {rows.map((x,i)=><div className="tr" key={x.finding_id||x.alert_id||i}><span><b>{x.title||x.rule_name||"Untitled"}</b><small>{x.finding_id||x.alert_id}</small></span><span>{x.source||"—"}</span><span className={"sev " + (x.severity||"low")}>{x.severity||"—"}</span><span>{Number(x.risk_score||0).toFixed(0)}</span></div>)}
   </div>;
 }
-function Listing({title,rows,incident,reload}) {
+function Listing({title,rows,incident,reload,canWrite}) {
   const createIncident = async (alert) => {
     try {
       await api("/api/v1/incidents/from-alert/" + alert.alert_id, {method:"POST"});
@@ -234,7 +244,7 @@ function Listing({title,rows,incident,reload}) {
         <span><b>{x.title||x.rule_name}</b><small>{x.alert_id}</small></span>
         <span>{x.source||"—"}</span><span className={"sev "+(x.severity||"low")}>{x.severity||"—"}</span>
         <span>{Number(x.risk_score||0).toFixed(0)}</span>
-        <button onClick={() => createIncident(x)}>Create incident</button>
+        {canWrite ? <button onClick={() => createIncident(x)}>Create incident</button> : <span className="muted">Read-only</span>}
       </div>) : <Table rows={rows}/>}
     </div>
   </section>;
