@@ -20,8 +20,8 @@ def test_iam_risk_endpoint(client, db_session):
         finding_type="identity", title="Wildcard IAM policy", description="Overly broad access",
         severity="high", status="new", asset={"asset_id":"role-1","asset_type":"iam_role"},
         severity_score=8, asset_criticality=8, exploitability=8, exposure=7,
-        data_sensitivity=7, risk_score=80, remediation="Restrict policy", first_seen="2026-01-01",
-        last_seen="2026-01-01", tags=[], metadata_json={}
+        data_sensitivity=7, risk_score=80, remediation="Restrict policy", first_seen=datetime.now(timezone.utc),
+        last_seen=datetime.now(timezone.utc), tags=[], metadata_json={}
     ))
     db_session.commit()
     r=client.get("/api/v1/dashboard-data/iam-risks")
