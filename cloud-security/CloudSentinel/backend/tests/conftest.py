@@ -5,6 +5,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 from app.db.models import Base
 from app.db.database import get_db
+from app.core.auth import current_user
 from app.main import app
 
 @pytest.fixture()
@@ -38,6 +39,13 @@ def client(db_session):
         yield db_session
 
     app.dependency_overrides[get_db] = override_get_db
+    app.dependency_overrides[current_user] = lambda: {
+        "sub": "test-user",
+        "username": "test-analyst",
+        "email": "test@example.com",
+        "roles": ["security_analyst"],
+        "claims": {},
+    }
 
     with TestClient(app) as test_client:
         yield test_client
