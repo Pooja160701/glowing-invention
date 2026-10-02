@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, Query, HTTPException
+from datetime import datetime, timezone
 from sqlalchemy.orm import Session
 from app.db.database import get_db
 from app.db.models import Finding
@@ -98,7 +99,6 @@ def list_findings(
             "severity": finding.severity,
             "status": finding.status,
             "risk_score": finding.risk_score,
-            "created_at": finding.created_at,
         }
         for finding in findings
     ]
@@ -143,8 +143,6 @@ def get_finding(
         "last_seen": finding.last_seen,
         "tags": finding.tags,
         "metadata": finding.metadata_json,
-        "created_at": finding.created_at,
-        "updated_at": finding.updated_at,
     }
 
 
