@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 
-from app.core.auth import current_user
+from app.core.auth import KEYCLOAK_CLIENT_ID, KEYCLOAK_ISSUER, current_user
 
 router = APIRouter(prefix="/api/v1/auth", tags=["Identity"])
 
@@ -8,8 +8,8 @@ router = APIRouter(prefix="/api/v1/auth", tags=["Identity"])
 @router.get("/config")
 def auth_config():
     return {
-        "issuer": "http://localhost:8080/realms/cloudsentinel",
-        "client_id": "cloudsentinel-frontend",
+        "issuer": KEYCLOAK_ISSUER,
+        "client_id": KEYCLOAK_CLIENT_ID,
         "protocol": "OpenID Connect",
         "flow": "Authorization Code + PKCE",
         "roles": [
