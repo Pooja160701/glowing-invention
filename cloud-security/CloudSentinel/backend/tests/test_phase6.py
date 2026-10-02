@@ -14,7 +14,7 @@ def test_vulnerability_endpoint(client, db_session):
     r=client.get("/api/v1/dashboard-data/vulnerabilities")
     assert r.status_code == 200 and r.json()["total"] == 1
 
-def test_iam_risk_endpoint(client, db_session):
+def test_iam_risk_endpoint(client, db_session, monkeypatch):
     db_session.add(Finding(
         finding_id="IAM-1", source_finding_id="src", source="iam",
         finding_type="identity", title="Wildcard IAM policy", description="Overly broad access",
@@ -24,5 +24,6 @@ def test_iam_risk_endpoint(client, db_session):
         last_seen=datetime.now(timezone.utc), tags=[], metadata_json={}
     ))
     db_session.commit()
+    monkeypatch.setattr("app.api.dashboard_data.analyze_iam_risks", lambda: {"connected": False, "roles_checked": 0, "items": []})
     r=client.get("/api/v1/dashboard-data/iam-risks")
     assert r.status_code == 200 and r.json()["total"] == 1
