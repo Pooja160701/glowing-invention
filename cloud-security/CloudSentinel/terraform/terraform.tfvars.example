@@ -1,4 +1,0 @@
-aws_region  = "ap-south-1"
-project_name = "cloudsentinel"
-environment  = "dev"
-owner        = "cloudsentinel-security"
