@@ -1,0 +1,11 @@
+services:
+  juice-shop:
+    image: bkimminich/juice-shop:latest
+    container_name: penetration-test-juice-shop
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: unsafe
+    security_opt:
+      - no-new-privileges:true
