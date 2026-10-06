@@ -15,7 +15,7 @@ A request for an FTP backup-style path returned HTTP 403 with an error message r
 
 ## Evidence
 - evidence/screenshots/23-security-misconfiguration-unauthenticated.png
-- evidence/screenshots/27-zap-ftp-file-access.png
+- evidence/screenshots/27-zap-ftp-directory.png
 - evidence/screenshots/25-zap-baseline-scan.png
 - evidence/screenshots/26-zap-baseline-report.png
 
