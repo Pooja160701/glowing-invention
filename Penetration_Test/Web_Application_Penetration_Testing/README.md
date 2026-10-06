@@ -5,7 +5,7 @@ A controlled web application penetration-testing portfolio project using OWASP J
 > Safety: use this project only against the intentionally vulnerable local laboratory. Never point the commands at systems you do not own or have explicit permission to test.
 
 ## Tech Stack
-Kali Linux | Burp Suite | OWASP ZAP | Nmap | SQLmap | Metasploit | OWASP methodology | Docker
+Docker | Burp Suite | OWASP ZAP | Nmap | SQLmap | Metasploit | OWASP methodology
 
 ## Assessment Architecture
 ```text
@@ -30,13 +30,13 @@ Burp Suite / OWASP ZAP
       v
 Controlled Validation
       +---- SQLmap
-      +---- Metasploit where applicable
+      +---- Metasploit applicability review
       |
       v
 Evidence + Risk Assessment
       |
       v
-Remediation + Retest
+Remediation Recommendations
       |
       v
 Final Report
@@ -54,6 +54,22 @@ Stop the lab:
 ```bash
 docker compose down
 ```
+
+## Confirmed Findings
+| ID | Finding | Severity | Primary Validation |
+|---|---|---|---|
+| WEB-001 | SQL Injection / Authentication Bypass | High | Burp Suite + SQLmap |
+| WEB-002 | Cross-Site Scripting | Medium | Manual browser validation + Burp evidence |
+| WEB-003 | IDOR / Broken Access Control | Medium | Burp baseline vs modified basket ID |
+| WEB-004 | Authentication Weakness | High | Laboratory credential authentication |
+| WEB-005 | Unauthenticated Application Version Disclosure | Low | Unauthenticated endpoint review |
+
+## Automated Assessment
+OWASP ZAP baseline scanning covered 88 URLs and reported 59 PASS, 8 WARN, 0 FAIL, and 0 INFO. The warnings were reviewed as a mixture of hardening observations, informational detections, and items requiring context; they were not blindly promoted to confirmed vulnerabilities.
+
+Metasploit Framework was evaluated for applicability. No Juice Shop-specific exploit module was identified, so no unrelated module was executed.
+
+SQLmap independently validated the login SQL injection as boolean-based blind injection against the SQLite backend. No database extraction or dumping was performed.
 
 ## Repository Structure
 ```text
@@ -81,17 +97,22 @@ Penetration Test/
 7. Capture sanitized evidence.
 8. Rate risk from evidence and impact.
 9. Recommend remediation.
-10. Retest fixes.
+10. Document retest requirements.
 
-## Reporting Standard
-Every confirmed finding should contain the finding title, severity, affected component, OWASP/CWE mapping, prerequisites, reproduction, evidence, impact, remediation, and retest status.
+## Evidence Integrity
+Findings are based on actual testing against the local deliberately vulnerable lab. Evidence was organized around the confirmed findings and supporting tool output.
 
-Final vulnerability counts are intentionally not fabricated. Findings become confirmed only after the local lab is actually tested.
+Before public publication, screenshots containing JWTs, session cookies, passwords, authorization headers, or unrelated personal/application data must be sanitized. No production or third-party systems were tested.
+
+## Reports
+- `reports/executive-summary.md`
+- `reports/vulnerability-report.md`
+- `reports/remediation-plan.md`
 
 ## Resume Version
 **Web Application Penetration Testing & Vulnerability Assessment**
 
-**Tech Stack:** Kali Linux | Burp Suite | OWASP ZAP | Nmap | SQLmap | Metasploit
+**Tech Stack:** Docker | Burp Suite | OWASP ZAP | Nmap | SQLmap | Metasploit
 
-- Performed controlled penetration testing against a deliberately vulnerable web application, assessing SQL injection, XSS, IDOR, authentication weaknesses, and security misconfigurations using OWASP-aligned testing practices.
-- Used Burp Suite, OWASP ZAP, Nmap, SQLmap, and Metasploit for reconnaissance, validation, evidence collection, and remediation-focused vulnerability reporting.
+- Performed controlled penetration testing against a deliberately vulnerable web application, identifying and validating SQL injection, XSS, IDOR/broken access control, authentication weaknesses, and information disclosure using OWASP-aligned testing practices.
+- Used Burp Suite, OWASP ZAP, Nmap, SQLmap, and Metasploit for reconnaissance, manual validation, automated analysis, evidence collection, and remediation-focused reporting.
