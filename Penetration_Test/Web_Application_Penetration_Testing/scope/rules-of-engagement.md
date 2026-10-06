@@ -13,7 +13,11 @@
 11. Remove the lab container when the assessment is complete.
 
 ## Evidence Policy
+
 Screenshots and HTTP captures must contain no live secrets. Replace JWTs, cookies, passwords, authorization headers, and other sensitive values with [REDACTED] before publication.
 
 ## Validation Policy
+
 An automated scanner result is treated as a lead, not a confirmed vulnerability. Manual review is required before inclusion in the final finding register.
+
+---

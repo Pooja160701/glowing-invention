@@ -9,6 +9,7 @@
 | 5 | WEB-005 Information Disclosure | Restrict unnecessary application-version metadata and review administrative endpoint authorization | Repeat unauthenticated endpoint checks |
 
 ## ZAP / Configuration Hardening
+
 - Add an appropriate Content-Security-Policy.
 - Review Cross-Origin-Embedder-Policy and cross-domain configuration.
 - Replace deprecated security headers with current equivalents.
@@ -17,9 +18,12 @@
 - Treat automated scanner warnings as inputs for manual verification.
 
 ## Secure Development Follow-up
+
 - Add security regression tests for all confirmed findings.
 - Centralize authorization logic.
 - Use parameterized database access throughout the application.
 - Add dependency and container scanning to CI/CD.
 - Review security headers and cookie attributes as deployment requirements.
 - Retest high-risk changes before release.
+
+---

@@ -1,9 +1,11 @@
 # Screenshot Evidence
 
 ## Final Evidence Set
+
 The numbered screenshots document the assessment from target startup through manual and automated validation.
 
 ### Core Evidence
+
 - 01 — Juice Shop running locally
 - 02 — Burp HTTP history
 - 03 — Burp Repeater baseline
@@ -19,9 +21,11 @@ The numbered screenshots document the assessment from target startup through man
 - 29 — Metasploit module applicability review
 
 ### Evidence Policy
+
 Only evidence that supports an actual tested result is included in the final set. Earlier duplicate IDOR screenshots were removed in favor of the clearer 21–22 pair.
 
 ## Publication Rules
+
 Before public publication:
 - Redact JWTs and session cookies.
 - Redact passwords and authorization headers.
@@ -29,3 +33,5 @@ Before public publication:
 - Keep enough request/response context to reproduce the finding.
 
 Evidence must reflect actual testing; screenshots must never be fabricated or edited in a way that changes the underlying result.
+
+---

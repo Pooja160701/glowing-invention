@@ -35,3 +35,5 @@ The assessment uses an OWASP-oriented workflow and adapts it to the deliberately
 ## Important Principle
 
 A scanner warning or interesting response is not automatically a vulnerability. Findings are reported only when the observed behavior is supported by evidence and can be explained and reproduced within the authorized lab.
+
+---

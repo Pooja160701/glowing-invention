@@ -22,3 +22,5 @@ Only sanitized screenshots and captures should be committed. Redact JWTs, cookie
 ## Scope
 
 All Burp testing was limited to the local Docker Juice Shop laboratory at `http://localhost:3000`.
+
+---

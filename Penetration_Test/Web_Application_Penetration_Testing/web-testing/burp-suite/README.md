@@ -3,6 +3,7 @@
 Burp Suite was the primary manual HTTP testing proxy for the local Juice Shop assessment.
 
 ## Workflow
+
 1. Start Burp Suite and use the temporary browser or configured test browser.
 2. Browse only http://localhost:3000.
 3. Review HTTP history.
@@ -14,6 +15,7 @@ Burp Suite was the primary manual HTTP testing proxy for the local Juice Shop as
 9. Save sanitized evidence for confirmed findings.
 
 ## Tests Actually Performed
+
 - HTTP history and endpoint mapping.
 - Login request inspection.
 - SQL injection validation against POST /rest/user/login.
@@ -22,8 +24,18 @@ Burp Suite was the primary manual HTTP testing proxy for the local Juice Shop as
 - Application-version/configuration endpoint review.
 
 ## Evidence
+
 Primary screenshots are stored under evidence/screenshots/.
-Key captures include 02-burp-http-history.png, 03-burp-repeater-baseline.png, 09-sqli-login-success.png, 21-idor-basket-baseline.png, and 22-idor-other-basket.png.
+Key captures include 
+
+- `02-burp-http-history.png`
+- `03-burp-repeater-baseline.png`
+- `09-sqli-login-success.png`
+- `21-idor-basket-baseline.png`
+- `22-idor-other-basket.png`
 
 ## Security
+
 Never commit live session cookies, JWTs, passwords, authorization headers, or Burp project files containing sensitive session state.
+
+---

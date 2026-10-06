@@ -41,3 +41,5 @@ Metasploit Framework was initialized successfully. Searches for Juice Shop, Expr
 ## Evidence Rule
 
 Automated scanner output is supporting evidence. Every security finding must be manually reviewed before being included in the final vulnerability report.
+
+---

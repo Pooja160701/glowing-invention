@@ -49,3 +49,5 @@ The FTP screenshot shows a denied request and an error/technology disclosure; it
 ## Evidence Handling
 
 Do not publish credentials, cookies, JWTs, or unrelated application data. Automated alerts must be manually classified before being promoted to confirmed findings.
+
+---
