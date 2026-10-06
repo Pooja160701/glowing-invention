@@ -1,28 +1,24 @@
-# SQL Injection Assessment
+## Validation
 
-## Objective
-Determine whether user-controlled input can alter a backend database query.
+SQL injection was manually validated using Burp Suite against the local OWASP Juice Shop login endpoint.
 
-## Method
-1. Identify database-backed parameters.
-2. Establish a normal response.
-3. Introduce harmless syntax markers.
-4. Compare status, content, timing, and errors.
-5. Confirm manually.
-6. Use SQLmap only against the local lab after identifying a credible candidate.
+Endpoint:
 
-Example lab structure:
-```bash
-sqlmap -u "http://localhost:3000/<authorized-endpoint>?id=1" --batch
-```
+POST /rest/user/login
+
+The application accepted a crafted email value and returned an authenticated administrator identity.
+
+The finding was independently validated with SQLmap.
+
+SQLmap identified the `email` JSON parameter as vulnerable to:
+
+- Boolean-based blind SQL injection
+- SQLite backend
+- JSON POST parameter
+
+SQLmap validation was performed only against the local Juice Shop laboratory environment.
 
 ## Evidence
-Capture the baseline request, modified request, relevant response, tool output, and impact.
 
-## Remediation
-- Use parameterized queries/prepared statements.
-- Avoid dynamic SQL from user input.
-- Apply database least privilege.
-- Add regression tests.
-
-Mapping: OWASP Injection; CWE-89.
+- Burp Suite SQL injection request/response
+- SQLmap validation output
