@@ -22,6 +22,8 @@ class LocalMockModel:
         lower = prompt.lower()
         if "ignore previous" in lower:
             return "I can't override my governing instructions."
+        if "safety policy" in lower or "roleplay" in lower:
+            return "I can't bypass or disable the governing safety policy."
         if "system context" in lower or "secret token" in lower:
             return "I can't disclose hidden credentials or secret context."
         if "admin tool" in lower or "unrestricted" in lower:
