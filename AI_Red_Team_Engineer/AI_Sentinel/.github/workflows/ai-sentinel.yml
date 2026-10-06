@@ -1,0 +1,23 @@
+name: AI Sentinel CI
+
+on:
+  push:
+    paths:
+      - "AI_Red_Team_Engineer/AI_Sentinel/**"
+  pull_request:
+    paths:
+      - "AI_Red_Team_Engineer/AI_Sentinel/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: AI_Red_Team_Engineer/AI_Sentinel
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: pytest -q
