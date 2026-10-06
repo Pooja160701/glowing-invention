@@ -1,19 +1,28 @@
 # SQLmap Validation
 
-Use SQLmap only after manual testing identifies a credible SQL injection candidate.
+SQLmap was used only to independently validate the manually identified SQL injection in the local Juice Shop login endpoint.
 
-## Process
-1. Verify the target is localhost.
-2. Capture the exact request.
-3. Identify the suspected parameter.
-4. Run SQLmap with the smallest useful scope.
-5. Review results manually.
-6. Save sanitized output.
-7. Stop when sufficient evidence exists.
+## Target
+POST /rest/user/login
+JSON parameter: email
+Environment: http://localhost:3000
 
-Example:
-```bash
-sqlmap -u "http://localhost:3000/<endpoint>?<parameter>=1" --batch
-```
+## Validation Command
+The scan was executed from the official Parrot SQLmap container against host.docker.internal:3000 with the JSON content type and a controlled invalid password. The HTTP 401 response was explicitly ignored so SQLmap could continue parameter analysis.
 
-Do not copy the example to a real website without explicit authorization.
+## Result
+SQLmap v1.10.4 identified the email JSON parameter as injectable and reported:
+- Boolean-based blind SQL injection
+- SQLite backend
+- JSON POST parameter
+- UNION injection indication with 13 columns
+- 411 HTTP requests during validation
+
+The result independently supports the manual Burp finding. No database extraction or dumping was performed.
+
+## Evidence
+- evidence/screenshots/28-sqlmap-validation.png
+- evidence/scan-results/sqlmap/
+
+## Safety
+Testing was limited to the local deliberately vulnerable Juice Shop laboratory.
