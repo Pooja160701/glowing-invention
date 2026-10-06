@@ -42,7 +42,7 @@ These alerts are not all confirmed vulnerabilities. They require context and man
 - `zap.yaml`
 - `25-zap-baseline-scan.png`
 - `26-zap-baseline-report.png`
-- `27-zap-ftp-file-access.png` where applicable
+- `27-zap-ftp-directory.png`
 
 The FTP screenshot shows a denied request and an error/technology disclosure; it does not by itself prove sensitive file exposure.
 
