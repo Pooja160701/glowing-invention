@@ -1,20 +1,17 @@
 # Metasploit Validation
 
-Metasploit is included for controlled security validation, not arbitrary exploitation.
+Metasploit Framework was evaluated for applicable modules against the local OWASP Juice Shop target.
 
-## Workflow
-1. Identify the exact service and version from the local lab.
-2. Search for a relevant module.
-3. Read the module information.
-4. Confirm the module applies to the lab target.
-5. Prefer a check or non-destructive validation option.
-6. Record the result and stop when sufficient evidence exists.
+## Result
+Metasploit Framework v6.5.5-dev initialized successfully.
 
-Example discovery:
-```text
-msfconsole
-search type:auxiliary <service>
-info <module>
-```
+The search for Juice Shop returned no matching module. Additional searches for Express, Node, and JavaScript produced modules targeting unrelated products and versions. No unrelated exploit module was executed.
 
-Do not run arbitrary exploit modules against public targets.
+## Assessment Decision
+The absence of a Juice Shop-specific module is an expected tool applicability result, not a failed penetration test. The assessment continued using Burp Suite, ZAP, SQLmap, and direct manual validation.
+
+## Evidence
+- evidence/screenshots/29-metasploit-module-validation.png
+
+## Safety
+Testing remained limited to the local laboratory.
