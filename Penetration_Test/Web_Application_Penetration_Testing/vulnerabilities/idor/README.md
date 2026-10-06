@@ -1,93 +1,35 @@
-# IDOR / Broken Access Control — View Another User's Basket
+# IDOR / Broken Access Control — Basket Access
 
 ## Target
-
-OWASP Juice Shop running locally.
-
-```text
-http://localhost:3000
-```
+OWASP Juice Shop running locally at http://localhost:3000
 
 ## Endpoint
-
-```text
 GET /rest/basket/{basketId}
-```
 
 ## Description
+The basket endpoint accepts a client-controlled basket identifier. During testing, the authenticated user's basket request was captured and the identifier was changed to another existing basket.
 
-The application exposes shopping basket data through a client-controlled basket identifier.
-
-During testing, the authenticated user's basket request was captured using Burp Suite. The basket identifier was then changed to another existing identifier.
-
-The modified request returned basket data belonging to a different basket.
+The modified request returned another basket's data without sufficient server-side ownership validation.
 
 ## Testing Method
-
-1. Authenticated normally as a test user.
-2. Added a product to the user's basket.
-3. Captured the basket API request using Burp Suite.
-4. Sent the request to Burp Repeater.
-5. Established a baseline response using the authenticated user's basket ID.
-6. Changed only the basket identifier.
-7. Sent the modified request.
-8. Compared the returned data with the baseline.
+1. Authenticate as a laboratory user.
+2. Capture the basket request with Burp Suite.
+3. Establish a baseline using the user's basket ID.
+4. Send the request to Repeater.
+5. Change only the basket identifier.
+6. Compare the response with the baseline.
 
 ## Result
-
-The application returned another basket's data without adequately verifying that the authenticated user owned the requested basket.
-
-## Impact
-
-An authenticated attacker may be able to access another user's shopping basket and obtain information about their shopping activity.
+Another basket's data was returned, confirming an authorization control failure.
 
 ## Severity
-
 Medium
 
 ## Evidence
+- evidence/screenshots/21-idor-basket-baseline.png
+- evidence/screenshots/22-idor-other-basket.png
 
-- `evidence/screenshots/15-idor-basket-baseline.png`
-- `evidence/screenshots/16-idor-other-basket.png`
-- `evidence/screenshots/17-idor-challenge-solved.png`
+Older duplicate screenshots should not be treated as the primary evidence set.
 
 ## Remediation
-
-Implement server-side authorization checks for every basket access.
-
-The server should verify that the requested basket belongs to the currently authenticated user before returning its contents.
-
-Do not rely on client-side identifiers or hidden UI controls for authorization.
-
-## VULN-002 — IDOR / Broken Access Control
-
-**Severity:** Medium
-
-**Category:** Broken Access Control
-
-**Endpoint:**
-
-```text
-GET /rest/basket/{basketId}
-```
-
-### Description
-
-The basket API accepts a client-controlled basket identifier. Testing demonstrated that changing the identifier could expose another basket's information without sufficient server-side ownership validation.
-
-### Impact
-
-An authenticated attacker could potentially view another customer's shopping activity.
-
-### Recommendation
-
-Enforce server-side authorization checks ensuring that the requested basket belongs to the authenticated user.
-
-### Evidence
-
-- `evidence/screenshots/15-idor-basket-baseline.png`
-- `evidence/screenshots/16-idor-other-basket.png`
-- `evidence/screenshots/17-idor-challenge-solved.png`
-```
-
----
+Enforce server-side authorization on every basket/object request and verify that the requested object belongs to the authenticated user.
