@@ -1,24 +1,26 @@
-## Validation
+# SQL Injection — Authentication Bypass
 
-SQL injection was manually validated using Burp Suite against the local OWASP Juice Shop login endpoint.
-
-Endpoint:
-
+## Target
 POST /rest/user/login
+Local target: http://localhost:3000
 
-The application accepted a crafted email value and returned an authenticated administrator identity.
+## Manual Validation
+Burp Suite was used to capture the login request and test a crafted SQL expression in the JSON email parameter.
 
-The finding was independently validated with SQLmap.
+The vulnerable request returned HTTP 200 and an authenticated administrator identity, demonstrating an authentication bypass condition.
 
-SQLmap identified the `email` JSON parameter as vulnerable to:
+## Independent Validation
+SQLmap independently identified the JSON email parameter as injectable and reported boolean-based blind SQL injection against a SQLite backend. It also indicated UNION injection with 13 columns.
 
-- Boolean-based blind SQL injection
-- SQLite backend
-- JSON POST parameter
+SQLmap validation was performed only against the local Juice Shop laboratory. No database extraction or dumping was performed.
 
-SQLmap validation was performed only against the local Juice Shop laboratory environment.
+## Severity
+High
 
 ## Evidence
+- evidence/screenshots/09-sqli-login-success.png
+- evidence/screenshots/28-sqlmap-validation.png
+- evidence/scan-results/sqlmap/
 
-- Burp Suite SQL injection request/response
-- SQLmap validation output
+## Remediation
+Use parameterized/prepared statements for database access, validate input server-side, and add regression tests for authentication-bypass SQL injection cases.
