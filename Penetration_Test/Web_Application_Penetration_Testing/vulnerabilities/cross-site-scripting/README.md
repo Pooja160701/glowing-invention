@@ -1,30 +1,24 @@
 # Cross-Site Scripting Assessment
 
-## Objective
-Determine whether attacker-controlled data is rendered as executable browser content.
+## Result
+A controlled XSS proof of concept was executed in the local Juice Shop application through the search/input flow. The evidence set contains the baseline, executed alert, resulting page, and Burp request.
 
-## Test Areas
-- Reflected input
-- Stored input
-- DOM-based input
-- Search fields
-- Profile fields
-- Reviews/feedback
-- URL parameters and fragments
+## Validation
+1. Establish the normal search behavior.
+2. Submit a controlled XSS payload in the local lab.
+3. Observe browser-side script execution.
+4. Capture the request and resulting page.
 
-## Safe Validation
-Start with a unique non-executing marker:
-```text
-PENTEST-XSS-MARKER-001
-```
+## Evidence
+- evidence/screenshots/11-xss-search-baseline.png
+- evidence/screenshots/12-xss-alert.png
+- evidence/screenshots/13-xss-executed-page.png
+- evidence/screenshots/14-xss-burp-request.png
 
-If reflected, identify the output context and encoding behavior before performing a controlled proof of concept inside the local lab.
+## Severity
+Medium
 
 ## Remediation
-- Context-aware output encoding.
-- Safe templating.
-- Secure DOM APIs.
-- Strict input handling.
-- Content Security Policy as defense in depth.
+Apply context-aware output encoding, safe DOM APIs, secure templating, strict input handling, and Content Security Policy as defense in depth.
 
-Mapping: OWASP XSS; CWE-79.
+Mapping: CWE-79 / OWASP Cross-Site Scripting.
